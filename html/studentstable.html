@@ -1,0 +1,236 @@
+<!doctype html>
+<html>
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <!-- Bootstrap CSS -->
+    <link href="//maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+      integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js" integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js" integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+   <title>Панель контроля</title>
+</head>
+<body>
+<div class="container-fluid">
+	<div class="row">
+		<div class="col-md-12 col-xl-6">
+			<div class="page-header">
+				<h1>
+				    Список студентов
+				</h1>
+                <a href="#" class="badge badge-pill badge-info" data-toggle="collapse" data-target="#collapseFiltre" aria-expanded="false" aria-controls="collapseFiltre">Фильтр поиска</a>
+			</div>
+            <div class="collapse alert alert-secondary" id="collapseFiltre">
+                <form>
+                <div class="row">
+				    <div class="form-group col-md-4">
+                        <h5>Именной поиск</h5>
+                        <label for="formGroupExampleInput">Фамилия</label>
+                        <input type="text" class="form-control" id="filterSecondname" placeholder="Введите фамилию">
+                        <label for="formGroupExampleInput">Имя</label>
+                        <input type="text" class="form-control" id="filterFirstname" placeholder="Введите имя">
+				    </div>
+				    <div class="form-group col-md-4">
+                        <h5>Квартирный поиск</h5>
+                        <label for="formGroupExampleInput">Квартира</label>
+                        <input type="text" class="form-control" id="filterFlat" placeholder="Введите квартиру или интервал">
+                        <label for="formGroupExampleInput">Подъезд</label>
+                        <div class="alert alert-light" role="alert">
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                            <input class="form-check-input" type="checkbox" id="checkPadik1" value="1"> 1
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                            <input class="form-check-input" type="checkbox" id="checkPadik2" value="1"> 2
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                            <input class="form-check-input" type="checkbox" id="checkPadik3" value="1"> 3
+                            </label>
+                        </div>
+                        <div class="form-check form-check-inline">
+                            <label class="form-check-label">
+                            <input class="form-check-input" type="checkbox" id="checkPadik4" value="1"> 4
+                            </label>
+                        </div>
+                        </div>
+				    </div>
+				    <div class="form-group col-md-4">
+                        <h5>Функциональный поиск</h5>
+                        <div class="form-check">
+                            <label class="form-check-label">
+                            <input class="form-check-input" type="checkbox" value="" id="">Денежная задолженность
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <label class="form-check-label">
+                            <input class="form-check-input" type="checkbox" value="" id="">Задолженность по справкам
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <label class="form-check-label">
+                            <input class="form-check-input" type="checkbox" value="" id="">Очередь к выселению
+                            </label>
+                        </div>
+				    </div>
+			    </div> 
+			    <button type="button" class="btn btn-success">Поиск</button>
+                </form>
+            </div>
+		</div>
+	</div>
+    <div class="col-md-12 col-xl-12">
+        <table class="table table-sm table-striped">
+            <thead>
+                <tr class="d-flex">
+                    <th class="col-1">ID</th>
+                    <th class="col-2">Кв<small>/К</small></th>
+                    <th class="col-5">Ф.И.О.</th>
+                    <th class="col-1">Курс</th>
+                    <th class="col-3">Действия</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr class="d-flex">
+                    <th class="col-1" scope="row">269</th>
+                    <th class="col-2" scope="row">25<small>/2</small></th>
+                    <td class="col-5">Кузьмин Лев Олегович</td>
+                    <td class="col-1">2</td>
+                    <td class="col-3">
+                        <a href="###STUDENTLINK" class="badge badge-pill badge-info"><i class="fa fa-info-circle"></i></a>
+                        <a href="###STUDENTLINKEDIT" class="badge badge-pill badge-success"><i class="fa fa-pencil"></i></a>
+                        <a href="###STUDENTLINKDELETE" class="badge badge-pill badge-danger"><i class="fa fa-trash-o"></i></a>
+                        <a href="###STUDENTSEL" class="badge badge-pill badge-primary"><i class="fa fa-check"></i></a>
+                    </td>
+                </tr>
+                <tr class="d-flex">
+                    <th class="col-1" scope="row">2</th>
+                    <th class="col-2" scope="row">14<small>/1</small></th>
+                    <td class="col-5">Иванов Пётр Русланович</td>
+                    <td class="col-1">4</td>
+                    <td class="col-3">
+                        <a href="###STUDENTLINK" class="badge badge-pill badge-info"><i class="fa fa-info-circle"></i></a>
+                        <a href="###STUDENTLINKEDIT" class="badge badge-pill badge-success"><i class="fa fa-pencil"></i></a>
+                        <a href="###STUDENTLINKDELETE" class="badge badge-pill badge-danger"><i class="fa fa-trash-o"></i></a>
+                        <a href="###STUDENTSEL" class="badge badge-pill badge-primary"><i class="fa fa-check"></i></a>
+                    </td>
+                </tr>
+                <tr class="d-flex table-danger">
+                    <th class="col-1" scope="row">96</th>
+                    <th class="col-2" scope="row">45<small>/4</small></th>
+                    <td class="col-5">Весёлкин Александр Сергеевич</td>
+                    <td class="col-1">2</td>
+                    <td class="col-3">
+                        <a href="###STUDENTLINK" class="badge badge-pill badge-info"><i class="fa fa-info-circle"></i></a>
+                        <a href="###STUDENTLINKEDIT" class="badge badge-pill badge-success"><i class="fa fa-pencil"></i></a>
+                        <a href="###STUDENTLINKDELETE" class="badge badge-pill badge-danger"><i class="fa fa-trash-o"></i></a>
+                        <a href="###STUDENTSEL" class="badge badge-pill badge-primary"><i class="fa fa-check"></i></a>
+                    </td>
+                </tr>
+                <tr class="d-flex">
+                    <th class="col-1" scope="row">96</th>
+                    <th class="col-2" scope="row">45<small>/4</small></th>
+                    <td class="col-5">Весёлкин Александр Сергеевич</td>
+                    <td class="col-1">2</td>
+                    <td class="col-3">
+                        <a href="###STUDENTLINK" class="badge badge-pill badge-info"><i class="fa fa-info-circle"></i></a>
+                        <a href="###STUDENTLINKEDIT" class="badge badge-pill badge-success"><i class="fa fa-pencil"></i></a>
+                        <a href="###STUDENTLINKDELETE" class="badge badge-pill badge-danger"><i class="fa fa-trash-o"></i></a>
+                        <a href="###STUDENTSEL" class="badge badge-pill badge-primary"><i class="fa fa-check"></i></a>
+                    </td>
+                </tr>
+                <tr class="d-flex table-danger">
+                    <th class="col-1" scope="row">96</th>
+                    <th class="col-2" scope="row">45<small>/4</small></th>
+                    <td class="col-5">Весёлкин Александр Сергеевич</td>
+                    <td class="col-1">2</td>
+                    <td class="col-3">
+                        <a href="###STUDENTLINK" class="badge badge-pill badge-info"><i class="fa fa-info-circle"></i></a>
+                        <a href="###STUDENTLINKEDIT" class="badge badge-pill badge-success"><i class="fa fa-pencil"></i></a>
+                        <a href="###STUDENTLINKDELETE" class="badge badge-pill badge-danger"><i class="fa fa-trash-o"></i></a>
+                        <a href="###STUDENTSEL" class="badge badge-pill badge-primary"><i class="fa fa-check"></i></a>
+                    </td>
+                </tr>
+                <tr class="d-flex table-danger">
+                    <th class="col-1" scope="row">96</th>
+                    <th class="col-2" scope="row">45<small>/4</small></th>
+                    <td class="col-5">Весёлкин Александр Сергеевич</td>
+                    <td class="col-1">2</td>
+                    <td class="col-3">
+                        <a href="###STUDENTLINK" class="badge badge-pill badge-info"><i class="fa fa-info-circle"></i></a>
+                        <a href="###STUDENTLINKEDIT" class="badge badge-pill badge-success"><i class="fa fa-pencil"></i></a>
+                        <a href="###STUDENTLINKDELETE" class="badge badge-pill badge-danger"><i class="fa fa-trash-o"></i></a>
+                        <a href="###STUDENTSEL" class="badge badge-pill badge-primary"><i class="fa fa-check"></i></a>
+                    </td>
+                </tr>
+                <tr class="d-flex">
+                    <th class="col-1" scope="row">18</th>
+                    <th class="col-2" scope="row">1<small>/2</small></th>
+                    <td class="col-5">Романова Елизавета Петровна</td>
+                    <td class="col-1">5</td>
+                    <td class="col-3">
+                        <a href="###STUDENTLINK" class="badge badge-pill badge-info"><i class="fa fa-info-circle"></i></a>
+                        <a href="###STUDENTLINKEDIT" class="badge badge-pill badge-success"><i class="fa fa-pencil"></i></a>
+                        <a href="###STUDENTLINKDELETE" class="badge badge-pill badge-danger"><i class="fa fa-trash-o"></i></a>
+                        <a href="###STUDENTSEL" class="badge badge-pill badge-primary"><i class="fa fa-check"></i></a>
+                    </td>
+                </tr>
+                <tr class="d-flex">
+                    <th class="col-1" scope="row">18</th>
+                    <th class="col-2" scope="row">1<small>/2</small></th>
+                    <td class="col-5">Романова Елизавета Петровна</td>
+                    <td class="col-1">5</td>
+                    <td class="col-3">
+                        <a href="###STUDENTLINK" class="badge badge-pill badge-info"><i class="fa fa-info-circle"></i></a>
+                        <a href="###STUDENTLINKEDIT" class="badge badge-pill badge-success"><i class="fa fa-pencil"></i></a>
+                        <a href="###STUDENTLINKDELETE" class="badge badge-pill badge-danger"><i class="fa fa-trash-o"></i></a>
+                        <a href="###STUDENTSEL" class="badge badge-pill badge-primary"><i class="fa fa-check"></i></a>
+                    </td>
+                </tr>
+                <tr class="d-flex table-info">
+                    <th class="col-1" scope="row">18</th>
+                    <th class="col-2" scope="row">1<small>/2</small></th>
+                    <td class="col-5">Романова Елизавета Петровна</td>
+                    <td class="col-1">5</td>
+                    <td class="col-3">
+                        <a href="###STUDENTLINK" class="badge badge-pill badge-info"><i class="fa fa-info-circle"></i></a>
+                        <a href="###STUDENTLINKEDIT" class="badge badge-pill badge-success"><i class="fa fa-pencil"></i></a>
+                        <a href="###STUDENTLINKDELETE" class="badge badge-pill badge-danger"><i class="fa fa-trash-o"></i></a>
+                        <a href="###STUDENTSEL" class="badge badge-pill badge-primary"><i class="fa fa-check"></i></a>
+                    </td>
+                </tr>
+                <tr class="d-flex">
+                    <th class="col-1" scope="row">18</th>
+                    <th class="col-2" scope="row">1<small>/2</small></th>
+                    <td class="col-5">Романова Елизавета Петровна</td>
+                    <td class="col-1">5</td>
+                    <td class="col-3">
+                        <a href="###STUDENTLINK" class="badge badge-pill badge-info"><i class="fa fa-info-circle"></i></a>
+                        <a href="###STUDENTLINKEDIT" class="badge badge-pill badge-success"><i class="fa fa-pencil"></i></a>
+                        <a href="###STUDENTLINKDELETE" class="badge badge-pill badge-danger"><i class="fa fa-trash-o"></i></a>
+                        <a href="###STUDENTSEL" class="badge badge-pill badge-primary"><i class="fa fa-check"></i></a>
+                    </td>
+                </tr>
+                <tr class="d-flex table-info">
+                    <th class="col-1" scope="row">18</th>
+                    <th class="col-2" scope="row">1<small>/2</small></th>
+                    <td class="col-5">Романова Елизавета Петровна</td>
+                    <td class="col-1">5</td>
+                    <td class="col-3">
+                        <a href="###STUDENTLINK" class="badge badge-pill badge-info"><i class="fa fa-info-circle"></i></a>
+                        <a href="###STUDENTLINKEDIT" class="badge badge-pill badge-success"><i class="fa fa-pencil"></i></a>
+                        <a href="###STUDENTLINKDELETE" class="badge badge-pill badge-danger"><i class="fa fa-trash-o"></i></a>
+                        <a href="###STUDENTSEL" class="badge badge-pill badge-primary"><i class="fa fa-check"></i></a>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+</body>
+</html>
