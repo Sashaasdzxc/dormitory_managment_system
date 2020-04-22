@@ -11,12 +11,12 @@ a.navig:hover:after{
 }
 .sidebar{
     position: sticky;
-    height: calc(100vh - 3rem);
+    height: calc(100vh - 4rem);
     background-color: #F30021;
 }
 .navbar{
-    max-height: 3rem;
+    min-height: 4rem;
 }
 .container-fluid{
-    margin-top: 3rem;
+    margin-top: 4rem;
 }
