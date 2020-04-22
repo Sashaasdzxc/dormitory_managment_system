@@ -10,45 +10,98 @@
    <title>Панель управления</title>
 </head>
 
-<body>
-   <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
-      <a class="navbar-brand" href="#">Cистема управления общежитием</a>
-      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-         aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-         <span class="navbar-toggler-icon"></span>
-      </button>
-      <div class="collapse navbar-collapse" id="navbarSupportedContent">
-         <ul class="navbar-nav mr-auto">
-            <li class="nav-item">
-               <a class="nav-link navig" href="#">Расселение</a></li>
-            <li class="nav-item">
-               <a class="nav-link navig" href="#">Жалобы</a></li>
-            <li class="nav-item">
-               <a class="nav-link navig" href="#">Строй-отряд</a></li>
-            <li class="nav-item">
-               <a class="nav-link navig" href="#">Объявления</a></li>
-         </ul>
-         <form class="form-inline my-2 my-lg-0">
-            <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Выход</button>
-         </form>
+<body class="bg-light">
+   <nav class="container-fluid navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+      <div class="container">
+         <a class="navbar-brand" href="#">Cистема управления общежитием</a>
+         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+            aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+         </button>
+         <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav mr-auto">
+               <li class="nav-item">
+                  <a class="nav-link navig" href="#">Расселение</a></li>
+               <li class="nav-item">
+                  <a class="nav-link navig" href="#">Жалобы</a></li>
+               <li class="nav-item">
+                  <a class="nav-link navig" href="#">Строй-отряд</a></li>
+               <li class="nav-item">
+                  <a class="nav-link navig" href="#">Объявления</a></li>
+            </ul>
+            <form class="form-inline my-2 my-lg-0">
+               <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Выход</button>
+            </form>
+         </div>
       </div>
    </nav>
-   <div class="container-fluid">
+   <div class="container mt-3">
       <div class="row">
          <div class="col-sm-9 order-2 order-sm-1">
-            Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempora nesciunt placeat eos ullam aliquid impedit!
+            Lorem pogU ipsum dolor sit amet consectetur adipisicing elit. Tempora nesciunt placeat eos ullam aliquid
+            impedit!
             Consequatur libero fugiat iste odit aliquid temporibus quaerat totam quisquam ea omnis. Quia, veritatis
             dignissimos. (таблица)
          </div>
-         <div class="col-sm-3 order-1 order-sm-2 sidebar">
+         <div class="col-sm-3 order-1 order-sm-2" style="background-color:#FFFFFF">
             <div class="form-group">
-               <h5>Поиск</h5>
-               <label for="SecondName">Фамилия</label>
-               <input type="text" class="form-control" id="SecondName" placeholder="Введите фамилию">
-               <label for="FirstName">Имя</label>
-               <input type="text" class="form-control" id="FirstName" placeholder="Введите имя">
-               <label for="Room">Номер квартиры</label>
-               <input type="text" class="form-control" id="Room" placeholder="">
+               <h5>Именной поиск</h5>
+               <label for="formGroupExampleInput">Фамилия</label>
+               <input type="text" class="form-control" id="filterSecondname" placeholder="Введите фамилию">
+               <label for="formGroupExampleInput">Имя</label>
+               <input type="text" class="form-control" id="filterFirstname" placeholder="Введите имя">
+            </div>
+            <div class="form-group">
+               <h5>Квартирный поиск</h5>
+               <label for="formGroupExampleInput">Квартира</label>
+               <input type="text" class="form-control" id="filterFlat"
+                  placeholder="Введите квартиру или интервал">
+               <label for="formGroupExampleInput">Подъезд</label>
+               <div class="alert alert-light" role="alert">
+                  <div class="form-check form-check-inline">
+                     <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" id="checkPadik1" value="1"> 1
+                     </label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                     <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" id="checkPadik2" value="1"> 2
+                     </label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                     <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" id="checkPadik3" value="1"> 3
+                     </label>
+                  </div>
+                  <div class="form-check form-check-inline">
+                     <label class="form-check-label">
+                        <input class="form-check-input" type="checkbox" id="checkPadik4" value="1"> 4
+                     </label>
+                  </div>
+               </div>
+            </div>
+            <div class="form-group">
+               <h5>Функциональный поиск</h5>
+               <div class="form-check">
+                  <label class="form-check-label">
+                     <input class="form-check-input" type="checkbox" value="" id="">Денежная
+                     задолженность
+                  </label>
+               </div>
+               <div class="form-check">
+                  <label class="form-check-label">
+                     <input class="form-check-input" type="checkbox" value="" id="">Задолженность по
+                     справкам
+                  </label>
+               </div>
+               <div class="form-check">
+                  <label class="form-check-label">
+                     <input class="form-check-input" type="checkbox" value="" id="">Очередь к
+                     выселению
+                  </label>
+               </div>
+               <br />
+               <button type="button" class="btn btn-success col-12">Поиск</button>
             </div>
          </div>
       </div>
