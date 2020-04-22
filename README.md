@@ -1,2 +1,2 @@
 ## Nothing now
-* use $npm install before start working
+* use *$npm install* before start working
