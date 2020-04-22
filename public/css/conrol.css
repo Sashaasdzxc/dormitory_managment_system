@@ -6,11 +6,11 @@ body,html {
 ul {
 	line-height: 2;
 }
-a {
+div.sidebar a {
 	color:#000000;
 	font-size: 2.2vmin;
 }
-a:after {
+div.sidebar a:after {
     background-color:#F30021;
     display: block;
     content: "";
@@ -18,8 +18,8 @@ a:after {
     width: 0%;
     transition: width .35s ease-in-out;
 }
-a:hover:after,
-a:focus:after {
+div.sidebar a:hover:after,
+div.sidebar a:focus:after {
     width: 100%;
    }
 .col-xl-2 {
