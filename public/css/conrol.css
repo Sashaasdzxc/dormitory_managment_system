@@ -2,21 +2,12 @@ a.navig:after {
     background-color:#F30021;
     display: block;
     content: '';
-    height: 2px;
+    height: 1px;
     width: 0%;
     transition: width .35s ease-in-out;
 }
 a.navig:hover:after{
     width: 100%;
 }
-.sidebar{
-    position: sticky;
-    height: calc(100vh - 4rem);
-    background-color:#edf5f5;
-}
-.navbar{
-    min-height: 4rem;
-}
-.container-fluid{
-    margin-top: 4rem;
-}
+
+
