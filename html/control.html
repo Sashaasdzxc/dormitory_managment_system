@@ -11,7 +11,7 @@
 </head>
 
 <body>
-   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+   <nav class="navbar fixed-top navbar-expand-lg navbar-dark bg-dark">
       <a class="navbar-brand" href="#">Cистема управления общежитием</a>
       <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -40,10 +40,16 @@
             Consequatur libero fugiat iste odit aliquid temporibus quaerat totam quisquam ea omnis. Quia, veritatis
             dignissimos. (таблица)
          </div>
-         <div class="col-sm-3 order-1 order-sm-2">
-            Lorem ipsum, dolor sit amet consectetur adipisicing elit. Modi ab mollitia veritatis natus temporibus amet
-            quae, optio sapiente magni error fugit! Illum similique ab ducimus, non odio eius minus cumque.(поиск по
-            таблице)
+         <div class="col-sm-3 order-1 order-sm-2 sidebar">
+            <div class="form-group">
+               <h5>Поиск</h5>
+               <label for="SecondName">Фамилия</label>
+               <input type="text" class="form-control" id="SecondName" placeholder="Введите фамилию">
+               <label for="FirstName">Имя</label>
+               <input type="text" class="form-control" id="FirstName" placeholder="Введите имя">
+               <label for="Room">Номер квартиры</label>
+               <input type="text" class="form-control" id="Room" placeholder="">
+            </div>
          </div>
       </div>
    </div>

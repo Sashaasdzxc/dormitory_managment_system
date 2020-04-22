@@ -9,3 +9,14 @@ a.navig:after {
 a.navig:hover:after{
     width: 100%;
 }
+.sidebar{
+    position: sticky;
+    height: calc(100vh - 3rem);
+    background-color: #F30021;
+}
+.navbar{
+    max-height: 3rem;
+}
+.container-fluid{
+    margin-top: 3rem;
+}
