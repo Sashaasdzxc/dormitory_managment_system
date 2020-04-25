@@ -3,7 +3,7 @@ var app = express();
 app.use(express.static(__dirname + '/public'));
 app.get('/',function(req,res) {
     res.sendFile(__dirname + "/html/control.html");
-})
+});
 app.get('/st',function(req,res) {
     res.sendFile(__dirname + "/html/st.html");
 })
