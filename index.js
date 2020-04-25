@@ -4,4 +4,7 @@ app.use(express.static(__dirname + '/public'));
 app.get('/',function(req,res) {
     res.sendFile(__dirname + "/html/control.html");
 })
+app.get('/st',function(req,res) {
+    res.sendFile(__dirname + "/html/st.html");
+})
 app.listen(3000);
