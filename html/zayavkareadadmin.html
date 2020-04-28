@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta charset="UTF-8">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<link rel="stylesheet" href="css/conrol.css">
+<title>Панель управления</title>
+</head>
+
+<body class="bg-light">
+<nav class="container-fluid navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+  <div class="container"> <a class="navbar-brand" href="#">Cистема управления общежитием</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item"> <a class="nav-link navig" href="#">Расселение</a></li>
+        <li class="nav-item"> <a class="nav-link navig" href="#">Жалобы</a></li>
+        <li class="nav-item"> <a class="nav-link navig" href="#">Строй-отряд</a></li>
+        <li class="nav-item"> <a class="nav-link navig" href="#">Объявления</a></li>
+      </ul>
+      <form class="form-inline my-2 my-lg-0">
+        <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Выход</button>
+      </form>
+    </div>
+  </div>
+</nav>
+<div class="container mt-3">
+  <div class="row">
+    <div class="col-sm-9 order-2 order-sm-1">
+      <form>
+        <h3>Заявление №04-22&nbsp;</h3>
+        <div class="form-group">
+          <h4>Статус: <small class="text-muted">Выполняется</small></h4>
+          <div class="row">
+            <div class="col-5">
+              <p><b>Ф.И.О.: </b>Иванов Иван Иванович</p>
+            </div>
+            <div class="col-3">
+              <p><b>Комната: </b>22<small>/2</small></p>
+            </div>
+            <div class="col-4">
+              <p><b>Дата: </b>16.02.2020</p>
+            </div>
+          </div>
+        </div>
+        <div class="group">
+          <h4>Описание проблемы</h4>
+            <p><strong>Тип проблемы: </strong>Ремонт</p>
+            <p><strong>Описание проблемы: </strong>В квартире лампочка сломалась, остались без света</p>
+            <p><strong>Комментарий: </strong>Буду с пацанами в квартире в понедельник и во вторник, в остальное время на учёбе</p>
+            <div class="dropdown-divider"></div>
+            <p><strong>Комментарий администрации: </strong>Замена лампочки назначена на вторник в 14:00. Ожидайте.</p>
+        </div>         
+      </form>
+    </div>
+    <div class="col-sm-3 order-1 order-sm-2 h-50" style="background-color:#FFFFFF">
+      <div class="form-group">
+        <h5>Мои заявки</h5>
+        <div> <a class="h6" href="#">№32-21 от 15.02.2020</a><br />
+          <span class="badge badge-pill badge-info">На рассмотрении</span> <a href="#ИНФОЗАЯВКИ" class="badge badge-pill badge-success"><i class="fa fa-info-circle"></i></a> <a href="#УДАЛИТЬЗАЯВКУТОЛЬКОКОГДАОНАНАРАССМОТРЕНИИ" class="badge badge-pill badge-danger"><i class="fa fa-trash-o"></i></a>
+          <div class="dropdown-divider"></div>
+        </div>
+        <div> <a class="h6" href="#">№30-18 от 12.02.2020</a><br />
+          <span class="badge badge-pill badge-warning">Выполняется</span> <a href="#ИНФОЗАЯВКИ" class="badge badge-pill badge-success"><i class="fa fa-info-circle"></i></a>
+          <div class="dropdown-divider"></div>
+        </div>
+        <div> <a class="h6" href="#">№29-15 от 10.02.2020</a><br />
+          <span class="badge badge-pill badge-danger">Отклонена</span> <a href="#ИНФОЗАЯВКИ" class="badge badge-pill badge-success"><i class="fa fa-info-circle"></i></a>
+          <div class="dropdown-divider"></div>
+        </div>
+        <div> <a class="h6" href="#">№27-11 от 15.01.2020</a><br />
+          <span class="badge badge-pill badge-success">Выполнена</span> <a href="#ИНФОЗАЯВКИ" class="badge badge-pill badge-success"><i class="fa fa-info-circle"></i></a>
+          <div class="dropdown-divider"></div>
+        </div>
+      </div>
+      <div class="form-group">
+        <button type="button" class="btn btn-success col-12">Новая заявка</button>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+    crossorigin="anonymous"></script> 
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script> 
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+    crossorigin="anonymous"></script> 
+<script src="https://kit.fontawesome.com/2214f17bb6.js" crossorigin="anonymous"></script>
+</body>
+</html>
