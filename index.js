@@ -14,7 +14,7 @@ app.get('/', function (req, res) {
         function (err, results, fields) {
             res.render('control', { users: results });
         });
-    connection.end();
+   // connection.end();
 });
 app.get('/st', function (req, res) {
     res.sendFile(__dirname + "/html/st.html");
