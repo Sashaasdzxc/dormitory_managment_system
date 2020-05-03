@@ -62,9 +62,9 @@
                         </a>
                         <a href="###STUDENTLINKEDIT" class="badge badge-pill badge-success"><i
                               class="fa fa-pencil"></i></a>
-                        <a  href="/delete/{{this.id}}"
-                           class="badge badge-pill badge-danger"><i class="fa fa-trash-o"></i></a>
-
+                        <a href="#STUDENTLINK{{this.id}}{{this.id}}" class="badge badge-pill badge-danger"
+                           data-toggle="collapse" role="button" aria-expanded="false" aria-controls="collapseExample"><i
+                              class="fa fa-trash-o"></i> </a>
                         <a href="###STUDENTSEL" class="badge badge-pill badge-primary"><i class="fa fa-check"></i></a>
                      </td>
                   </tr>
@@ -92,11 +92,24 @@
                         </div>
                      </td>
                   </tr>
+                  <tr>
+                     <td colspan="5" style="padding: 0;">
+                        <div class="collapse" id="STUDENTLINK{{this.id}}{{this.id}}">
+                           <div class="card card-body">
+                              <h5 class="card-title">Удалить стдуента?</h5>
+                              <p class="card-text">Это действие невозможно отменить</p>
+                              <form action="delete/{{this.id}}" method="POST">
+                                 <button type="submit" class="btn btn-primary">Удалить</button>
+                              </form>
+                           </div>
+                        </div>
+                     </td>
+                  </tr>
                   {{/each}}
                </tbody>
             </table>
          </div>
-         <div class="col-sm-3 order-1 order-sm-2" style="background-color:#FFFFFF">
+         <div class="col-sm-3 order-1 order-sm-2 h-50" style="background-color:#FFFFFF">
             <div class="form-group">
                <h5>Именной поиск</h5>
                <label for="formGroupExampleInput">Фамилия</label>
@@ -169,7 +182,7 @@
       crossorigin="anonymous"></script>
    <script src="https://kit.fontawesome.com/2214f17bb6.js" crossorigin="anonymous"></script>
    <script>
-      delete.onclick = function (event) { 
+      delete.onclick = function (event) {
          if (event.target.nodeName != 'A') return;
 
          let href = event.target.getAttribute('href');
