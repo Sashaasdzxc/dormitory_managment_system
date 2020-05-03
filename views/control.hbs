@@ -56,13 +56,40 @@
                      <td>{{this.second_name}} {{this.first_name}} {{this.last_name}}</td>
                      <td>{{this.course}}</td>
                      <td>
-                        <a href="###STUDENTLINK" class="badge badge-pill badge-info"><i
-                              class="fa fa-info-circle"></i></a>
+                        <a href="#STUDENTLINK{{this.id}}" class="badge badge-pill badge-info" data-toggle="collapse"
+                           role="button" aria-expanded="false" aria-controls="collapseExample"><i
+                              class="fa fa-info-circle"></i>
+                        </a>
                         <a href="###STUDENTLINKEDIT" class="badge badge-pill badge-success"><i
                               class="fa fa-pencil"></i></a>
-                        <a href="###STUDENTLINKDELETE" class="badge badge-pill badge-danger"><i
-                              class="fa fa-trash-o"></i></a>
+                        <a  href="/delete/{{this.id}}"
+                           class="badge badge-pill badge-danger"><i class="fa fa-trash-o"></i></a>
+
                         <a href="###STUDENTSEL" class="badge badge-pill badge-primary"><i class="fa fa-check"></i></a>
+                     </td>
+                  </tr>
+                  <tr>
+                     <td colspan="5" style="padding: 0;">
+                        <div class="collapse" id="STUDENTLINK{{this.id}}">
+                           <div class="card card-body">
+                              <p>
+                                 <b>Личная информация</b><br>
+                                 <b>Ф.И.О.: </b>{{this.second_name}} {{this.first_name}} {{this.last_name}}<br>
+                                 <b>Дата рождения: </b>{{this.birthday}}<br>
+                                 <b>Институт: </b>{{this.institute}}<br>
+                                 <b>Форма обучения: </b>{{this.type}}<br>
+                                 <b>Курс: </b>{{this.course}}</br>
+                                 <b>Паспортные данные</b><br>
+                                 <b>Серия, номер: </b>{{this.pas_serial}}/{{this.pas_number}} <b>Дата выдачи:
+                                 </b>{{this.date_vidan}}<br>
+                                 <b>Выдан: </b>{{this.vidan}} <br>
+                                 <b>Постоянная регистрация: </b>{{this.reg}}<br>
+                                 <b>Данные о договоре</b><br>
+                                 <b>Номер: </b>{{this.dog_num}}<b>Дата заключения: </b>{{this.date_start}}<b>Окончание:
+                                 </b>{{this.date_end}}
+                              </p>
+                           </div>
+                        </div>
                      </td>
                   </tr>
                   {{/each}}
@@ -141,6 +168,16 @@
       integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
       crossorigin="anonymous"></script>
    <script src="https://kit.fontawesome.com/2214f17bb6.js" crossorigin="anonymous"></script>
+   <script>
+      delete.onclick = function (event) { 
+         if (event.target.nodeName != 'A') return;
+
+         let href = event.target.getAttribute('href');
+         alert(href); // может быть подгрузка с сервера, генерация интерфейса и т.п.
+
+         return false; // отменить действие браузера (переход по ссылке)
+      };
+   </script>
 </body>
 
 </html>
