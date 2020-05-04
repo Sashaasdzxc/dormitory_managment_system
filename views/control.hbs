@@ -110,64 +110,36 @@
             </table>
          </div>
          <div class="col-sm-3 order-1 order-sm-2 h-50" style="background-color:#FFFFFF">
-            <div class="form-group">
-               <h5>Именной поиск</h5>
-               <label for="formGroupExampleInput">Фамилия</label>
-               <input type="text" class="form-control" id="filterSecondname" placeholder="Введите фамилию">
-               <label for="formGroupExampleInput">Имя</label>
-               <input type="text" class="form-control" id="filterFirstname" placeholder="Введите имя">
-            </div>
-            <div class="form-group">
-               <h5>Квартирный поиск</h5>
-               <label for="formGroupExampleInput">Квартира</label>
-               <input type="text" class="form-control" id="filterFlat" placeholder="Введите квартиру или интервал">
-               <label for="formGroupExampleInput">Подъезд</label>
-               <div class="alert alert-light" role="alert">
-                  <div class="form-check form-check-inline">
+            <form method="POST">
+               <div class="form-group">
+                  <h5>Именной поиск</h5>
+                  <label for="filterSecondname">Фамилия</label>
+                  <input type="text" name="s_n" class="form-control" id="filterSecondname" placeholder="Введите фамилию">
+                  <label for="filterFirstname">Имя</label>
+                  <input type="text" name="f_n" class="form-control" value="" id="filterFirstname" placeholder="Введите имя">
+               </div>
+               <div class="form-group">
+                  <h5>Квартирный поиск</h5>
+                  <label for="filterFlat">Введите квартиру или интервал</label>
+                  <input type="text" name="kv" class="form-control" id="filterFlat" placeholder="Номер квартиры">                 
+               </div>
+               <div class="form-group">
+                  <h5>Функциональный поиск</h5>
+                  <div class="form-check">
                      <label class="form-check-label">
-                        <input class="form-check-input" type="checkbox" id="checkPadik1" value="1"> 1
+                        <input class="form-check-input" name="dz" type="checkbox" value="dz" id="">Денежная
+                        задолженность
                      </label>
                   </div>
-                  <div class="form-check form-check-inline">
+                  <div class="form-check">
                      <label class="form-check-label">
-                        <input class="form-check-input" type="checkbox" id="checkPadik2" value="1"> 2
+                        <input class="form-check-input" name="so" type="checkbox" value="so" id="">Строй-отрядовец
                      </label>
                   </div>
-                  <div class="form-check form-check-inline">
-                     <label class="form-check-label">
-                        <input class="form-check-input" type="checkbox" id="checkPadik3" value="1"> 3
-                     </label>
-                  </div>
-                  <div class="form-check form-check-inline">
-                     <label class="form-check-label">
-                        <input class="form-check-input" type="checkbox" id="checkPadik4" value="1"> 4
-                     </label>
-                  </div>
+                  <br/>
+                  <button type="submit" class="btn btn-success col-12">Поиск</button>
                </div>
-            </div>
-            <div class="form-group">
-               <h5>Функциональный поиск</h5>
-               <div class="form-check">
-                  <label class="form-check-label">
-                     <input class="form-check-input" type="checkbox" value="" id="">Денежная
-                     задолженность
-                  </label>
-               </div>
-               <div class="form-check">
-                  <label class="form-check-label">
-                     <input class="form-check-input" type="checkbox" value="" id="">Задолженность по
-                     справкам
-                  </label>
-               </div>
-               <div class="form-check">
-                  <label class="form-check-label">
-                     <input class="form-check-input" type="checkbox" value="" id="">Очередь к
-                     выселению
-                  </label>
-               </div>
-               <br />
-               <button type="button" class="btn btn-success col-12">Поиск</button>
-            </div>
+            </form>
          </div>
       </div>
    </div>
@@ -181,16 +153,6 @@
       integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
       crossorigin="anonymous"></script>
    <script src="https://kit.fontawesome.com/2214f17bb6.js" crossorigin="anonymous"></script>
-   <script>
-      delete.onclick = function (event) {
-         if (event.target.nodeName != 'A') return;
-
-         let href = event.target.getAttribute('href');
-         alert(href); // может быть подгрузка с сервера, генерация интерфейса и т.п.
-
-         return false; // отменить действие браузера (переход по ссылке)
-      };
-   </script>
 </body>
 
 </html>

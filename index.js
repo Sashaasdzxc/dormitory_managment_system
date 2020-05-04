@@ -30,6 +30,24 @@ app.post("/delete/:id", function (req, res) {
     });
 });
 
+app.post("/", urlencodedParser, function (req, res) {
+    var f_n = req.body.f_n;
+    var s_n = req.body.s_n;
+    var kv =req.body.kv;
+    var f_n_q="1";
+    var s_n_q ="1";
+    if(f_n!=""){
+        f_n_q="first_name='"+f_n+"'";
+    }
+    if(s_n!=""){
+        f_n_q="second_name='"+s_n+"'";
+    }
+    connection.query("SELECT * FROM students WHERE "+f_n_q+" AND "+s_n_q, function (err, results, fields) {
+        //console.log(result);
+        res.render('control', { users: results });
+    });
+});
+
 app.get('/st', function (req, res) {
     res.sendFile(__dirname + "/html/st.html");
 })
