@@ -1,0 +1,198 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+<meta charset="UTF-8">
+<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+<link rel="stylesheet" href="css/conrol.css">
+<title>Панель управления</title>
+</head>
+
+<body class="bg-light">
+<nav class="container-fluid navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
+  <div class="container"> <a class="navbar-brand" href="#">Cистема управления общежитием</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
+          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item"> <a class="nav-link navig" href="#">Расселение</a></li>
+        <li class="nav-item"> <a class="nav-link navig" href="#">Жалобы</a></li>
+        <li class="nav-item"> <a class="nav-link navig" href="#">Строй-отряд</a></li>
+        <li class="nav-item"> <a class="nav-link navig" href="#">Объявления</a></li>
+      </ul>
+      <form class="form-inline my-2 my-lg-0">
+        <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Выход</button>
+      </form>
+    </div>
+  </div>
+</nav>
+<div class="container mt-3">
+  <div class="row">
+    <div class="col-sm-9 order-2 order-sm-1">
+        <form>
+        <h3>Мастер добавления студента</h3>
+        <h4>Личная информация</h4>
+        <div class="form-group row">
+            <label for="name" class="col-2 col-form-label">Ф.И.О.: </label>
+            <div class="col-10">
+                <input class="form-control" type="text" placeholder="Иванов Иван Иванович" id="name">
+            </div>
+            <div class="col-2"></div>
+            <div class="col-10">
+                <a class="small text-muted" href="#РЕЖИМФИО">Расширенный ввод Ф.И.О.</a>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="birthday" class="col-2 col-form-label">Д/р: </label>
+            <div class="col-10">
+                <input class="form-control" type="date" placeholder="" id="birthday">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="grade1" class="col-2 col-form-label">И-т: </label>
+            <div class="col-10">
+                <select class="form-control" placeholder="Выберите институт" id="grade1">
+                    <option>ИИТ</option>
+                    <option>Инстиут Кибернетики</option>
+                    <option>ИТХТ</option>
+                    <option>ФТИ</option>
+                    <option>ИРТС</option>
+                    <option>ИНТЕГУ</option>
+                    <option>ИЭП</option>
+                    <option>ИКБСП</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="grade2" class="col-2 col-form-label">Тип: </label>
+            <div class="col-4">
+                <select class="form-control" placeholder="Тип образования" id="grade2">
+                    <option>Бакалвариат</option>
+                    <option>Специалитет</option>
+                    <option>Магистратура</option>
+                    <option>Аспирантура</option>
+                    <option>Другое</option>
+                </select>
+            </div>
+            <label for="grade3" class="col-2 col-form-label">Курс: </label>
+            <div class="col-4">
+                <input class="form-control" type="number" placeholder="Курс" id="grade3" min="1" max="6">
+            </div>
+        </div>
+        <h4>Паспортные данные</h4>
+        <div class="form-group row">
+            <label for="passport1" class="col-2 col-form-label">Серия: </label>
+            <div class="col-4">
+                <input class="form-control" type="number" placeholder="1234" id="passport1">
+            </div>
+            <label for="passport2" class="col-2 col-form-label">Номер: </label>
+            <div class="col-4">
+                <input class="form-control" type="number" placeholder="567891" id="passport2">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="passport3" class="col-2 col-form-label">Выдан: </label>
+            <div class="col-10">
+                <input class="form-control" type="text" placeholder="Отдел..." id="passport3">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="passport4" class="col-2 col-form-label">Дата выдачи: </label>
+            <div class="col-10">
+                <input class="form-control" type="date" placeholder="" id="passport4">
+            </div>
+        </div>
+        <div class="form-group row">
+            <label for="passport5" class="col-2 col-form-label">Постоянная регистрация: </label>
+            <div class="col-10">
+                <textarea class="form-control" placeholder="Введите место постоянной регистрации согласно паспорту" id="passport5"></textarea>
+            </div>
+        </div>
+        <h4>Данные о договоре</h4>
+        <div class="form-group row">
+            <label for="dogovor1" class="col-2 col-form-label">Номер: </label>
+            <div class="col-4">
+                <input class="form-control" type="text" placeholder="1234" id="dogovor1">
+            </div>
+            <label for="dogovor2" class="col-2 col-form-label">Дата: </label>
+            <div class="col-4">
+                <input class="form-control" type="date" placeholder="" id="dogovor2">
+            </div>
+        </div>
+        <div class="form-group row">
+            <div class="col-6"></div>
+            <label for="dogovor3" class="col-2 col-form-label">Окончание: </label>
+            <div class="col-4">
+                <input class="form-control" type="date" placeholder="" id="dogovor3">
+            </div>
+        </div>
+        <div class="group">
+          <h4>Выбор комнаты <small class="text-muted" id="displaySelectedRoom"></small></h4>
+          <ul class="nav nav-tabs" role="tablist">
+              {{#each padiki}}
+              <li class="nav-item">
+                  <a class="nav-link" data-toggle="tab" href="#p{{@index}}" role="tab">Подъезд {{@index}}<br /><span class="small text-center text-success">Свободно: <span id="setherefree_{{@index}}">0</span></span></a>
+              </li>
+              {{/each}}
+          </ul>
+          <div class="tab-content">
+              {{#each padiki}}
+              <div class="tab-pane" id="p{{@index}}" role="tabpanel">
+                  <div class="container">
+                      <div class="row">
+                          {{#each this.flat}}
+                          <div class="col-xl-4 h-50 mt-1 mb-1"> <!--- Вот этот блок тупо генерируешь по количеству свободных квартир -->
+                              <div class="container"  style="background-color:#FFFFFF">
+                              <h6 class="text-center">Квартира №{{this.numin}}</h6>
+                              {{#each this.flatdata}}
+                              <div class="row mt-1">
+                                  <div class="col-sm-8"><em>Комната №{{this.numin}}</em><br /><span class="small text-center">Свободно <span class="text-success">{{frs this ../pod}}</span> из {{this.size}}</span></div><div class="col-4"><a href="#SETROOM" class="text-muted" onclick="setRoom({{../numin}},{{this.numin}})">Выбрать комнату</a></div>
+                                  <script>
+                                        var genid = 'setherefree_' + {{../pod}};
+                                        var counter = parseInt(document.getElementById(genid).innerHTML);
+                                        counter += {{frs this ../pod}};
+                                        document.getElementById(genid).innerHTML = counter;
+                                  </script>
+                              </div>
+                              {{/each}}
+                              </div>
+                          </div>
+                          {{/each}}
+                      </div>    
+                  </div>
+              </div>
+              {{/each}}
+          </div>
+        </div>
+        <button type="submit" class="btn btn-primary">Добавить</button>
+        <button type="back" class="btn btn-danger">Отменить</button>
+      </form>
+    </div>
+    <div class="col-sm-3 order-1 order-sm-2 h-50" style="background-color:#FFFFFF">
+      <div class="form-group">
+        <h5>Как добавить студента?</h5>
+        <p>На данной странице Вы можете блабла тут инструкция как пользоваться сие чудом потому что юзвери тупые (<strong>можно</strong> заюзать различные <mark>выделения</mark> текста <em>будет классно</em>)</p>
+        <p>Далеко-далеко за словесными горами в стране гласных и согласных живут рыбные тексты. Вдали от всех живут они в буквенных домах на берегу Семантика большого языкового океана. Маленький ручеек Даль журчит по всей стране и обеспечивает ее всеми необходимыми правилами. Эта парадигматическая страна, в которой жаренные члены предложения залетают прямо в рот. Даже всемогущая пунктуация не имеет власти над рыбными текстами, ведущими безорфографичный образ жизни. Однажды одна маленькая строчка рыбного текста по имени Lorem ipsum решила выйти в большой мир грамматики.</p>
+      </div>
+    </div>
+  </div>
+</div>
+<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
+    crossorigin="anonymous"></script> 
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
+    crossorigin="anonymous"></script> 
+<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
+    crossorigin="anonymous"></script> 
+<script src="https://kit.fontawesome.com/2214f17bb6.js" crossorigin="anonymous"></script>
+<script>
+    function setRoom(flat,room) {
+        var string = 'Выбрано: кв.' + flat + ' к.' + room;
+        document.getElementById("displaySelectedRoom").innerHTML = string;
+    }
+</script>
+</body>
+</html>
