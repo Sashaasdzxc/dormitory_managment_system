@@ -65,7 +65,7 @@ class Room {
         this.freeStatus = freeStatus;
     }
     refreshStatus(){
-        this.freeStatus = (size === this.students.length()) ? false : true;
+        this.freeStatus = (this.size != this.students.length);
     }
     addStudent(id){
         this.refreshStatus();
@@ -73,7 +73,7 @@ class Room {
             this.students.push(id);
             this.refreshStatus();
         }
-        else alert('Ошибка - в комнате нет свободных мест')
+        else console.log('В комнате нет свободных мест')
     }
     deleteStudent(id){
         let newstudents = [];
@@ -104,7 +104,12 @@ class Flat {
         for (let i = 0; i < this.flatdata.length; i++) {
             if (this.flatdata[i].freeStatus) freenum++;
         }
-        this.freeStatus = !(freenum === this.flatdata.length);
+        this.freeStatus = (freenum != 0);
+    }
+    insertRoom(room){
+        console.log(this.flatdata);
+        this.flatdata.push(room);
+        this.refreshStatus();
     }
 }
 
@@ -150,12 +155,8 @@ app.get('/addflat', function (req, res) {
     res.render('addflat', { wereDone: 0 });
 })
 app.post("/addflat", urlencodedParser, function (req, res) {
-    console.log('Got req');
-    console.log(req.body.podnum);
-    console.log(req.body.flatnum);
     connection.query("SELECT * FROM flats WHERE flat='" + req.body.flatnum + "'", function (err, foremptyres, fields) {
         if (foremptyres.length == 0) {
-            console.log(foremptyres);
             var flatdata = [];
             if (req.body.roomsize1) flatdata.push(new Room(1, req.body.roomsize1, [], 1));
             if (req.body.roomsize2) flatdata.push(new Room(2, req.body.roomsize2, [], 1));
@@ -173,5 +174,57 @@ app.post("/addflat", urlencodedParser, function (req, res) {
             }); 
         }
         else res.render('addflat', { alreadyExists: 1 });         
+    });
+});
+//Добавление студента
+function makevc(length) {
+    var result = '';
+    var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    for ( var i = 0; i < length; i++ ) {
+       result += characters.charAt(Math.floor(Math.random() * characters.length));
+    }
+    return result;
+ }
+
+app.post("/add", urlencodedParser, function (req, res) {
+    let newstudentverifycode = makevc(6);
+    let newstudentid;
+    let namearr = []
+    if (req.body.name0) {
+        namearr = req.body.name0.split(' ');
+    }
+    else {
+        namearr[0] = req.body.name1;
+        namearr[1] = req.body.name2;
+        if (req.body.name3) namearr[2] = req.body.name3;
+        else namearr[2] = '';
+    }
+    var thisFlat;
+    let thisroom;
+    let flatdata;
+  connection.query("SELECT * FROM flats WHERE flat='" + req.body.selFlat + "'", function (err, forflat, fields) {
+    if (err) res.render('afteradd', { otherError: 'СТУДЕНТ НЕ ДОБАВЛЕН: ' + err });
+    if (forflat === null) res.render('afteradd', { otherError: 'СТУДЕНТ НЕ ДОБАВЛЕН: ' + err });
+        if (forflat[0].isFree == 1) {
+            flatdata = JSON.parse(forflat[0].flatdata);
+            if (flatdata[req.body.selRoom - 1].freeStatus) //-1 потому что numin и индекс комнаты отличны на одну единицу в пользу numin (если комната №2 (numin=2), то её индекс - 1)
+            {
+                thisroom = new Room(flatdata[req.body.selRoom - 1].numin, flatdata[req.body.selRoom - 1].size, flatdata[req.body.selRoom - 1].students, 1);
+                thisFlat = new Flat(forflat[0].id, forflat[0].pod, forflat[0].flat, flatdata, 1);
+                connection.query("INSERT INTO students (`id`, `first_name`, `second_name`, `last_name`, `birthday`, `institute`, `type`, `course`, `pas_serial`, `pas_number`, `vidan`, `date_vidan`, `reg`, `dog_num`, `date_start`, `date_end`, `flat`, `room`) VALUES (NULL, '" + namearr[1] + "', '" + namearr[0] + "', '" + namearr[2] + "', '" + req.body.birthday + "', '" + req.body.grade1 + "', '" + req.body.grade2 + "', '" + req.body.grade3 + "', '" + req.body.passport1 + "', '" + req.body.passport2 + "', '" + req.body.passport3 + "', '" + req.body.passport4 + "', '" + req.body.passport5 + "', '" + req.body.dogovor1 + "', '" + req.body.dogovor2 + "', '" + req.body.dogovor3 + "', '" + req.body.selFlat + "', '" + req.body.selRoom + "')", function (err, newstudent, fields) {
+                    if (err) res.render('afteradd', { otherError: 'СТУДЕНТ НЕ ДОБАВЛЕН: ' + err });
+                    thisroom.addStudent(newstudent.insertId);
+                    thisFlat.flatdata[req.body.selRoom - 1] = thisroom;
+                    thisFlat.refreshStatus();
+                    console.log(thisFlat);
+                    connection.query("UPDATE flats SET flatdata='" + JSON.stringify(thisFlat.flatdata) + "',isFree='" + ((thisFlat.freeStatus) ? 1 : 0) + "' WHERE flat='" + req.body.selFlat + "'", function (err, finalresult, fields) {
+                        if (err) res.render('afteradd', { otherError: 'СТУДЕНТ ДОБАВЛЕН, НО КВАРТИРА НЕ ОБНОВЛЕНА: ' + err });
+                        res.render('afteradd', { wereDone: 1 });
+                    });
+                });
+            }
+            else res.render('afteradd', { roomIsFull: 1 });
+        }
+        else res.render('afteradd', { flatIsFull: 1 });
     });
 });
