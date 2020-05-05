@@ -136,6 +136,7 @@ hbs.registerHelper("frs", function(room, pod){
     freepodid = "fp" + pod;
     return freespace;
 });
+
 app.set("view engine", "hbs");
 app.get('/add', function (req, res) {
     connection.query("SELECT * FROM flats",
@@ -143,3 +144,34 @@ app.get('/add', function (req, res) {
             res.render('addnewstudent2', { padiki: madeFreeList(results) });
         });
 })
+
+//Добавление квартиры
+app.get('/addflat', function (req, res) {
+    res.render('addflat', { wereDone: 0 });
+})
+app.post("/addflat", urlencodedParser, function (req, res) {
+    console.log('Got req');
+    console.log(req.body.podnum);
+    console.log(req.body.flatnum);
+    connection.query("SELECT * FROM flats WHERE flat='" + req.body.flatnum + "'", function (err, foremptyres, fields) {
+        if (foremptyres.length == 0) {
+            console.log(foremptyres);
+            var flatdata = [];
+            if (req.body.roomsize1) flatdata.push(new Room(1, req.body.roomsize1, [], 1));
+            if (req.body.roomsize2) flatdata.push(new Room(2, req.body.roomsize2, [], 1));
+            if (req.body.roomsize3) flatdata.push(new Room(3, req.body.roomsize3, [], 1));
+            if (req.body.roomsize4) flatdata.push(new Room(4, req.body.roomsize4, [], 1));
+            if (req.body.roomsize5) flatdata.push(new Room(5, req.body.roomsize5, [], 1));
+            if (req.body.roomsize6) flatdata.push(new Room(6, req.body.roomsize6, [], 1));
+            if (req.body.roomsize7) flatdata.push(new Room(7, req.body.roomsize7, [], 1));
+            if (req.body.roomsize8) flatdata.push(new Room(8, req.body.roomsize8, [], 1));
+            if (req.body.roomsize9) flatdata.push(new Room(9, req.body.roomsize9, [], 1));
+            if (req.body.roomsize10) flatdata.push(new Room(10, req.body.roomsize10, [], 1));
+            connection.query("INSERT INTO `flats` (`id`, `pod`, `flat`, `flatdata`, `isFree`) VALUES (NULL, '" + req.body.podnum + "', '" + req.body.flatnum + "', '" + JSON.stringify(flatdata) + "','1')", function (err, results, fields) {
+                if(err) res.render('addflat', { otherError: err });
+                res.render('addflat', { wereDone: 1 });
+            }); 
+        }
+        else res.render('addflat', { alreadyExists: 1 });         
+    });
+});
