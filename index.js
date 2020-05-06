@@ -23,11 +23,21 @@ app.get('/', function (req, res) {
     // connection.end();
 });
 
-app.post("/delete/:id", function (req, res) {
-    const id = req.params.id;
-    connection.query("SELECT * FROM students WHERE id=?", [id], function (err, result, fields) {
-        //console.log(result);
-        res.redirect("/");
+app.post("/delete/:resp", function (req, res) {
+    //let require = req.params.resp.split('_');
+    let resp = [];
+    resp = req.params.resp.split('_');
+    connection.query("SELECT * FROM flats WHERE flat='" + resp[1] + "'", function (err, respflat, fields) {
+        let thisFlat = new Flat(respflat[0].id, respflat[0].pod, respflat[0].flat, JSON.parse(respflat[0].flatdata), respflat[0].isFree);
+        console.log(thisFlat);
+        thisFlat.removeStudent(resp[0], resp[2]);
+        console.log(thisFlat);
+        connection.query("UPDATE flats SET flatdata='" + JSON.stringify(thisFlat.flatdata) + "',isFree='" + ((thisFlat.freeStatus) ? 1 : 0) + "' WHERE flat='" + resp[1] + "'", function (err, finalresult, fields) {
+            if (err) res.render('afteradd', { otherError: 'СТУДЕНТ УДАЛЁН, НО КВАРТИРА НЕ ОБНОВЛЕНА: ' + err });
+            connection.query("DELETE FROM students WHERE id=?", [resp[0]], function (err, result, fields) {
+                res.redirect("/");
+            });
+        });
     });
 });
 
@@ -105,6 +115,11 @@ class Flat {
             if (this.flatdata[i].freeStatus) freenum++;
         }
         this.freeStatus = (freenum != 0);
+    }
+    removeStudent(id, room){
+        this.flatdata[room - 1] = new Room(this.flatdata[room - 1].numin, this.flatdata[room - 1].size, this.flatdata[room - 1].students, this.flatdata[room - 1].freestatus);
+        this.flatdata[room - 1].deleteStudent(id);
+        this.refreshStatus();
     }
     insertRoom(room){
         console.log(this.flatdata);

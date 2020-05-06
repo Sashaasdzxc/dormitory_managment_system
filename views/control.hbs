@@ -52,7 +52,7 @@
                   {{#each users}}
                   <tr>
                      <th scope="row">{{this.id}}</th>
-                     <td>25</td>
+                     <td>{{this.flat}}<small>/{{this.room}}</small></td>
                      <td>{{this.second_name}} {{this.first_name}} {{this.last_name}}</td>
                      <td>{{this.course}}</td>
                      <td>
@@ -98,7 +98,7 @@
                            <div class="card card-body">
                               <h5 class="card-title">Удалить стдуента?</h5>
                               <p class="card-text">Это действие невозможно отменить</p>
-                              <form action="delete/{{this.id}}" method="POST">
+                              <form action="delete/{{this.id}}_{{this.flat}}_{{this.room}}" method="POST">
                                  <button type="submit" class="btn btn-primary">Удалить</button>
                               </form>
                            </div>
