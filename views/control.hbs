@@ -80,12 +80,13 @@
                                  <b>Форма обучения: </b>{{this.type}}<br>
                                  <b>Курс: </b>{{this.course}}</br>
                                  <b>Паспортные данные</b><br>
-                                 <b>Серия, номер: </b>{{this.pas_serial}}/{{this.pas_number}} <b>Дата выдачи:
+                                 <b>Серия, номер: </b>{{this.pas_serial}} {{this.pas_number}} <b>Дата выдачи:
                                  </b>{{this.date_vidan}}<br>
                                  <b>Выдан: </b>{{this.vidan}} <br>
                                  <b>Постоянная регистрация: </b>{{this.reg}}<br>
                                  <b>Данные о договоре</b><br>
-                                 <b>Номер: </b>{{this.dog_num}}<b>Дата заключения: </b>{{this.date_start}}<b>Окончание:
+                                 <b>Номер: </b>{{this.dog_num}}<b> Дата заключения: </b>{{this.date_start}}<b>
+                                    Окончание:
                                  </b>{{this.date_end}}
                               </p>
                            </div>
@@ -114,14 +115,16 @@
                <div class="form-group">
                   <h5>Именной поиск</h5>
                   <label for="filterSecondname">Фамилия</label>
-                  <input type="text" name="s_n" class="form-control" id="filterSecondname" placeholder="Введите фамилию">
+                  <input type="text" name="s_n" class="form-control" id="filterSecondname"
+                     placeholder="Введите фамилию">
                   <label for="filterFirstname">Имя</label>
-                  <input type="text" name="f_n" class="form-control" value="" id="filterFirstname" placeholder="Введите имя">
+                  <input type="text" name="f_n" class="form-control" value="" id="filterFirstname"
+                     placeholder="Введите имя">
                </div>
                <div class="form-group">
                   <h5>Квартирный поиск</h5>
                   <label for="filterFlat">Введите квартиру или интервал</label>
-                  <input type="text" name="kv" class="form-control" id="filterFlat" placeholder="Номер квартиры">                 
+                  <input type="text" name="kv" class="form-control" id="filterFlat" placeholder="Номер квартиры">
                </div>
                <div class="form-group">
                   <h5>Функциональный поиск</h5>
@@ -136,13 +139,15 @@
                         <input class="form-check-input" name="so" type="checkbox" value="so" id="">Строй-отрядовец
                      </label>
                   </div>
-                  <br/>
+                  <br />
                   <button type="submit" class="btn btn-success col-12">Поиск</button>
                </div>
             </form>
          </div>
       </div>
    </div>
+   <button type="button" class="btn btn-lg btn-danger" data-toggle="popover" title="Popover title"
+      data-content="And here's some amazing content. It's very engaging. Right?">Click to toggle popover</button>
    <script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
       integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
       crossorigin="anonymous"></script>
@@ -153,6 +158,11 @@
       integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
       crossorigin="anonymous"></script>
    <script src="https://kit.fontawesome.com/2214f17bb6.js" crossorigin="anonymous"></script>
+   <script>
+      $(function () {
+  $('[data-toggle="popover"]').popover()
+})
+   </script>
 </body>
 
 </html>

@@ -29,9 +29,7 @@ app.post("/delete/:resp", function (req, res) {
     resp = req.params.resp.split('_');
     connection.query("SELECT * FROM flats WHERE flat='" + resp[1] + "'", function (err, respflat, fields) {
         let thisFlat = new Flat(respflat[0].id, respflat[0].pod, respflat[0].flat, JSON.parse(respflat[0].flatdata), respflat[0].isFree);
-        console.log(thisFlat);
         thisFlat.removeStudent(resp[0], resp[2]);
-        console.log(thisFlat);
         connection.query("UPDATE flats SET flatdata='" + JSON.stringify(thisFlat.flatdata) + "',isFree='" + ((thisFlat.freeStatus) ? 1 : 0) + "' WHERE flat='" + resp[1] + "'", function (err, finalresult, fields) {
             if (err) res.render('afteradd', { otherError: 'СТУДЕНТ УДАЛЁН, НО КВАРТИРА НЕ ОБНОВЛЕНА: ' + err });
             connection.query("DELETE FROM students WHERE id=?", [resp[0]], function (err, result, fields) {
@@ -42,18 +40,17 @@ app.post("/delete/:resp", function (req, res) {
 });
 
 app.post("/", urlencodedParser, function (req, res) {
-    var f_n = req.body.f_n;
     var s_n = req.body.s_n;
-    var kv =req.body.kv;
-    var f_n_q="1";
-    var s_n_q ="1";
-    if(f_n!=""){
-        f_n_q="first_name='"+f_n+"'";
+    var kv = req.body.kv;
+    var f_n_q = "1";
+    var s_n_q = "1";
+    if (req.body.f_n != "") {
+        f_n_q = "first_name='" + req.body.f_n + "'";
     }
-    if(s_n!=""){
-        f_n_q="second_name='"+s_n+"'";
+    if (req.body.s_n != "") {
+        f_n_q = "second_name='" + req.body.s_n + "'";
     }
-    connection.query("SELECT * FROM students WHERE "+f_n_q+" AND "+s_n_q, function (err, results, fields) {
+    connection.query("SELECT * FROM students WHERE " + f_n_q + " AND " + s_n_q, function (err, results, fields) {
         //console.log(result);
         res.render('control', { users: results });
     });
@@ -68,16 +65,16 @@ app.get('/z', function (req, res) {
 app.listen(3000);
 
 class Room {
-    constructor(numin, size, students, freeStatus){
+    constructor(numin, size, students, freeStatus) {
         this.numin = numin;
         this.size = size;
         this.students = students;
         this.freeStatus = freeStatus;
     }
-    refreshStatus(){
+    refreshStatus() {
         this.freeStatus = (this.size != this.students.length);
     }
-    addStudent(id){
+    addStudent(id) {
         this.refreshStatus();
         if (this.freeStatus) {
             this.students.push(id);
@@ -85,7 +82,7 @@ class Room {
         }
         else console.log('В комнате нет свободных мест')
     }
-    deleteStudent(id){
+    deleteStudent(id) {
         let newstudents = [];
         let j = 0;
         for (let i = 0; i < this.students.length; i++) {
@@ -97,38 +94,38 @@ class Room {
         this.students = newstudents;
         this.refreshStatus();
     }
-    getFreeNum(){
+    getFreeNum() {
         return (size - this.students.length);
     }
 }
 class Flat {
-    constructor(id, pod, numin, flatdata, freeStatus){
+    constructor(id, pod, numin, flatdata, freeStatus) {
         this.id = id;
         this.pod = pod;
         this.numin = numin;
         this.flatdata = flatdata;
         this.freeStatus = freeStatus;
     }
-    refreshStatus(){
+    refreshStatus() {
         let freenum = 0;
         for (let i = 0; i < this.flatdata.length; i++) {
             if (this.flatdata[i].freeStatus) freenum++;
         }
         this.freeStatus = (freenum != 0);
     }
-    removeStudent(id, room){
+    removeStudent(id, room) {
         this.flatdata[room - 1] = new Room(this.flatdata[room - 1].numin, this.flatdata[room - 1].size, this.flatdata[room - 1].students, this.flatdata[room - 1].freestatus);
         this.flatdata[room - 1].deleteStudent(id);
         this.refreshStatus();
     }
-    insertRoom(room){
+    insertRoom(room) {
         console.log(this.flatdata);
         this.flatdata.push(room);
         this.refreshStatus();
     }
 }
 
-function madeFreeList(results){
+function madeFreeList(results) {
     var padiki = [];
     padiki[1] = [];
     padiki[2] = [];
@@ -140,10 +137,10 @@ function madeFreeList(results){
             let rooms = []; //В итоге по-хорошему можно и без классов, так как они могут память жрать, но не думаю что очень и критично много. Если юзать мой flatengine, то классы помогут быстро что-то менять, так что штука полезная и убирать не стал
             let flatdatatemp = JSON.parse(results[currentflatID].flatdata);
             for (let currentroomID = 0; currentroomID < flatdatatemp.length; currentroomID++) { //Работаем непосредственно с комнатами
-                if(flatdatatemp[currentroomID].freeStatus) {
+                if (flatdatatemp[currentroomID].freeStatus) {
                     roomtemp = new Room(flatdatatemp[currentroomID].numin, flatdatatemp[currentroomID].size, flatdatatemp[currentroomID].students, flatdatatemp[currentroomID].freeStatus)
                     rooms[roomtemp.numin] = roomtemp;
-                }     
+                }
             }
             let flat = new Flat(results[currentflatID].id, results[currentflatID].pod, results[currentflatID].flat, rooms, results[currentflatID].isFree);
             padiki[results[currentflatID].pod].push(flat);
@@ -151,7 +148,7 @@ function madeFreeList(results){
     }
     return padiki;
 }
-hbs.registerHelper("frs", function(room, pod){
+hbs.registerHelper("frs", function (room, pod) {
     var freespace = room.size - room.students.length;
     freepodid = "fp" + pod;
     return freespace;
@@ -184,22 +181,22 @@ app.post("/addflat", urlencodedParser, function (req, res) {
             if (req.body.roomsize9) flatdata.push(new Room(9, req.body.roomsize9, [], 1));
             if (req.body.roomsize10) flatdata.push(new Room(10, req.body.roomsize10, [], 1));
             connection.query("INSERT INTO `flats` (`id`, `pod`, `flat`, `flatdata`, `isFree`) VALUES (NULL, '" + req.body.podnum + "', '" + req.body.flatnum + "', '" + JSON.stringify(flatdata) + "','1')", function (err, results, fields) {
-                if(err) res.render('addflat', { otherError: err });
+                if (err) res.render('addflat', { otherError: err });
                 res.render('addflat', { wereDone: 1 });
-            }); 
+            });
         }
-        else res.render('addflat', { alreadyExists: 1 });         
+        else res.render('addflat', { alreadyExists: 1 });
     });
 });
 //Добавление студента
 function makevc(length) {
     var result = '';
     var characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
-    for ( var i = 0; i < length; i++ ) {
-       result += characters.charAt(Math.floor(Math.random() * characters.length));
+    for (var i = 0; i < length; i++) {
+        result += characters.charAt(Math.floor(Math.random() * characters.length));
     }
     return result;
- }
+}
 
 app.post("/add", urlencodedParser, function (req, res) {
     let newstudentverifycode = makevc(6);
@@ -217,9 +214,9 @@ app.post("/add", urlencodedParser, function (req, res) {
     var thisFlat;
     let thisroom;
     let flatdata;
-  connection.query("SELECT * FROM flats WHERE flat='" + req.body.selFlat + "'", function (err, forflat, fields) {
-    if (err) res.render('afteradd', { otherError: 'СТУДЕНТ НЕ ДОБАВЛЕН: ' + err });
-    if (forflat === null) res.render('afteradd', { otherError: 'СТУДЕНТ НЕ ДОБАВЛЕН: ' + err });
+    connection.query("SELECT * FROM flats WHERE flat='" + req.body.selFlat + "'", function (err, forflat, fields) {
+        if (err) res.render('afteradd', { otherError: 'СТУДЕНТ НЕ ДОБАВЛЕН: ' + err });
+        if (forflat === null) res.render('afteradd', { otherError: 'СТУДЕНТ НЕ ДОБАВЛЕН: ' + err });
         if (forflat[0].isFree == 1) {
             flatdata = JSON.parse(forflat[0].flatdata);
             if (flatdata[req.body.selRoom - 1].freeStatus) //-1 потому что numin и индекс комнаты отличны на одну единицу в пользу numin (если комната №2 (numin=2), то её индекс - 1)
