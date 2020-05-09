@@ -52,6 +52,15 @@ app.post("/", urlencodedParser, function (req, res) {
             }
         }
     }
+    var kv_s=req.body.kv.split(", ");
+    console.log(kv_s);
+    if(kv_s[1]!=undefined){
+        k_v_q=` AND flat=${kv_s[0]}`;
+        for(let i=1; i<kv_s.length; i++){
+            k_v_q+=` OR flat=${kv_s[i]}`;
+        }
+    }
+    console.log(k_v_q);
     var f_n_q = "1";
     var s_n_q = "1";
     if (req.body.f_n != "") {
