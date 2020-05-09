@@ -41,24 +41,23 @@ app.post("/delete/:resp", function (req, res) {
 
 app.post("/", urlencodedParser, function (req, res) {
     var s_n = req.body.s_n;
-    var kv_s = req.body.kv.split(" ");
-    var k_v_q = " AND 1";
+    var kv_s = req.body.kv;
+    kv_s = kv_s.replace(/\s+/g, '');
+    var k_v_q = "";
+    kv_s = kv_s.split(",");
     if (kv_s[0] != "") {
-        k_v_q = ` AND flat=${kv_s[0]}`;
-        if (kv_s[2] != undefined) {
-            k_v_q += ` OR flat=${kv_s[2]}`
-            if (kv_s[1] == "-") {
-                k_v_q = ` AND flat >=${kv_s[0]} AND flat <=${kv_s[2]}`;
+        k_v_q+=` AND ( `
+        for (let i = 0; i < kv_s.length; i++) {
+            var kv_r = kv_s[i].split("-");
+            if (kv_r[1] != undefined) {
+                k_v_q += ` ( flat>=${kv_r[0]} AND flat<=${kv_r[1]} ) OR`;
+            }
+            else {
+                k_v_q+=` flat=${kv_s[i]} OR`;
             }
         }
-    }
-    var kv_s=req.body.kv.split(", ");
-    console.log(kv_s);
-    if(kv_s[1]!=undefined){
-        k_v_q=` AND flat=${kv_s[0]}`;
-        for(let i=1; i<kv_s.length; i++){
-            k_v_q+=` OR flat=${kv_s[i]}`;
-        }
+        k_v_q=k_v_q.substr(0,k_v_q.length-2);
+        k_v_q+=" )";
     }
     console.log(k_v_q);
     var f_n_q = "1";
