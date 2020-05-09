@@ -41,7 +41,17 @@ app.post("/delete/:resp", function (req, res) {
 
 app.post("/", urlencodedParser, function (req, res) {
     var s_n = req.body.s_n;
-    var kv = req.body.kv;
+    var kv_s = req.body.kv.split(" ");
+    var k_v_q = " AND 1";
+    if (kv_s[0] != "") {
+        k_v_q = ` AND flat=${kv_s[0]}`;
+        if (kv_s[2] != undefined) {
+            k_v_q += ` OR flat=${kv_s[2]}`
+            if (kv_s[1] == "-") {
+                k_v_q = ` AND flat >=${kv_s[0]} AND flat <=${kv_s[2]}`;
+            }
+        }
+    }
     var f_n_q = "1";
     var s_n_q = "1";
     if (req.body.f_n != "") {
@@ -50,8 +60,7 @@ app.post("/", urlencodedParser, function (req, res) {
     if (req.body.s_n != "") {
         f_n_q = "second_name='" + req.body.s_n + "'";
     }
-    connection.query("SELECT * FROM students WHERE " + f_n_q + " AND " + s_n_q, function (err, results, fields) {
-        //console.log(result);
+    connection.query(`SELECT * FROM students WHERE ` + f_n_q + ` AND ` + s_n_q + k_v_q, function (err, results, fields) {
         res.render('control', { users: results });
     });
 });
