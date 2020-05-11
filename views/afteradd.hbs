@@ -1,44 +1,19 @@
-<!DOCTYPE html>
-<html lang="ru">
-<head>
-<meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-<meta charset="UTF-8">
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
-    integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
-<link rel="stylesheet" href="css/conrol.css">
-<title>Панель управления</title>
-</head>
-
-<body class="bg-light">
-<nav class="container-fluid navbar sticky-top navbar-expand-lg navbar-dark bg-dark">
-  <div class="container"> <a class="navbar-brand" href="#">Cистема управления общежитием</a>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation"> <span class="navbar-toggler-icon"></span> </button>
-    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-      <ul class="navbar-nav mr-auto">
-        <li class="nav-item"> <a class="nav-link navig" href="#">Расселение</a></li>
-        <li class="nav-item"> <a class="nav-link navig" href="#">Жалобы</a></li>
-        <li class="nav-item"> <a class="nav-link navig" href="#">Строй-отряд</a></li>
-        <li class="nav-item"> <a class="nav-link navig" href="#">Объявления</a></li>
-      </ul>
-      <form class="form-inline my-2 my-lg-0">
-        <button class="btn btn-outline-warning my-2 my-sm-0" type="submit">Выход</button>
-      </form>
-    </div>
-  </div>
-</nav>
 <div class="container mt-3">
   <div class="row">
     <div class="col-sm-9 order-2 order-sm-1">
-        <h3>Мастер добавления студента</h3>
+      <h3>Мастер добавления студента</h3>
       {{#if wereDone}}
-      <div class="alert alert-success mt-2" role="alert">Студент успешно добавлен. Вы можете <a href="./add">добавить ещё одного</a>, <a href="./control">перейти к списку студентов/a> или <a href="./">вернуться на главную</a></div>
+      <div class="alert alert-success mt-2" role="alert">Студент успешно добавлен. Вы можете <a href="/add">добавить
+          ещё одного</a>, <a href="/control">перейти к списку студентов</a>
+      </div>
       {{/if}}
       {{#if roomIsFull}}
-      <div class="alert alert-danger mt-2" role="alert">Похоже, что данная комната уже занята. Её могли занять пока вы вводили данные. Попробуйте выбрать другую комнату.</a></div>
+      <div class="alert alert-danger mt-2" role="alert">Похоже, что данная комната уже занята. Её могли занять пока вы
+        вводили данные. Попробуйте выбрать другую комнату.</a></div>
       {{/if}}
       {{#if flatIsFull}}
-      <div class="alert alert-danger mt-2" role="alert">Похоже, что данная квартира уже полностью занята. Её могли занять пока вы вводили данные. Попробуйте выбрать другую комнату.</a></div>
+      <div class="alert alert-danger mt-2" role="alert">Похоже, что данная квартира уже полностью занята. Её могли
+        занять пока вы вводили данные. Попробуйте выбрать другую комнату.</a></div>
       {{/if}}
       {{#if otherError}}
       <div class="alert alert-danger mt-2" role="alert">Ошибка запроса: <p>{{otherError}}</p></a></div>
@@ -47,57 +22,51 @@
     <div class="col-sm-3 order-1 order-sm-2 h-50" style="background-color:#FFFFFF">
       <div class="form-group">
         <h5>Как добавить квартиру?</h5>
-        <p>На данной странице Вы можете блабла тут инструкция как пользоваться сие чудом потому что юзвери тупые (<strong>можно</strong> заюзать различные <mark>выделения</mark> текста <em>будет классно</em>)</p>
-        <p>Далеко-далеко за словесными горами в стране гласных и согласных живут рыбные тексты. Вдали от всех живут они в буквенных домах на берегу Семантика большого языкового океана. Маленький ручеек Даль журчит по всей стране и обеспечивает ее всеми необходимыми правилами. Эта парадигматическая страна, в которой жаренные члены предложения залетают прямо в рот. Даже всемогущая пунктуация не имеет власти над рыбными текстами, ведущими безорфографичный образ жизни. Однажды одна маленькая строчка рыбного текста по имени Lorem ipsum решила выйти в большой мир грамматики.</p>
+        <p>На данной странице Вы можете блабла тут инструкция как пользоваться сие чудом потому что юзвери тупые
+          (<strong>можно</strong> заюзать различные <mark>выделения</mark> текста <em>будет классно</em>)</p>
+        <p>Далеко-далеко за словесными горами в стране гласных и согласных живут рыбные тексты. Вдали от всех живут
+          они в буквенных домах на берегу Семантика большого языкового океана. Маленький ручеек Даль журчит по всей
+          стране и обеспечивает ее всеми необходимыми правилами. Эта парадигматическая страна, в которой жаренные
+          члены предложения залетают прямо в рот. Даже всемогущая пунктуация не имеет власти над рыбными текстами,
+          ведущими безорфографичный образ жизни. Однажды одна маленькая строчка рыбного текста по имени Lorem ipsum
+          решила выйти в большой мир грамматики.</p>
       </div>
     </div>
   </div>
 </div>
-<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
-    integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n"
-    crossorigin="anonymous"></script> 
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
-    integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo"
-    crossorigin="anonymous"></script> 
-<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
-    integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6"
-    crossorigin="anonymous"></script> 
-<script src="https://kit.fontawesome.com/2214f17bb6.js" crossorigin="anonymous"></script>
 <script>
-    function addNewRoom() { 
-        let maxRooms = 10; //Значение maxRooms определяет максимально возможное количество комнат. Если когда-нибудь как во всех нормальных проектах важные системные глобальные переменные будут вынесены в отдельный документ и данный скрипт будет актуален - то эту переменную надо перенести.
-        for (let i = 10; i > 0; i--) {
-            let lastroom;
-            lastroom = 'roomnum' + i;
-            if (document.getElementById(lastroom) != null ) {
-                let newroomstring = document.createElement('div');
-                if (i != 1) {
-                    let node = document.querySelector('#remover' + i);
-                    node.parentNode.removeChild(node);
-                }
-                newroomstring.innerHTML = '<div class="container mt-2" id="room' + (i + 1) + '"><div class="row justify-content-xl-center rounded m-2" style="background-color: #FFF"><label class="col-xl-2 col-form-label"><small>Комната № </small><span class="font-weight-bold" id="roomnum' + (i + 1) + '">' + (i + 1) + '</span></label><label for="roomsize' + (i + 1) + '" class="col-xl-2 col-form-label">Вместимость: </label><div class="col-xl-2"><input class="form-control" type="number" placeholder="Число" id="roomsize' + (i + 1) + '" name="roomsize' + (i + 1) + '" min="1" max="6"></div><div class="col-xl-1" id="forremover' + (i + 1) + '"><a href="#" class="badge badge-danger badge-pill align-middle" onclick="removeRoom('+ (i + 1) +')" id="remover' + (i + 1) + '">Удалить комнату <i class="fa fa-trash-o"></i></a></div></div></div>';
-                roomlist.appendChild(newroomstring);
-                if (i == 9) {
-                    document.getElementById('newroombtn').disabled = true;
-                }
-                i = -1; //Ломаем к чертям цикл    
-            }
+  function addNewRoom() {
+    let maxRooms = 10; //Значение maxRooms определяет максимально возможное количество комнат. Если когда-нибудь как во всех нормальных проектах важные системные глобальные переменные будут вынесены в отдельный документ и данный скрипт будет актуален - то эту переменную надо перенести.
+    for (let i = 10; i > 0; i--) {
+      let lastroom;
+      lastroom = 'roomnum' + i;
+      if (document.getElementById(lastroom) != null) {
+        let newroomstring = document.createElement('div');
+        if (i != 1) {
+          let node = document.querySelector('#remover' + i);
+          node.parentNode.removeChild(node);
         }
+        newroomstring.innerHTML = '<div class="container mt-2" id="room' + (i + 1) + '"><div class="row justify-content-xl-center rounded m-2" style="background-color: #FFF"><label class="col-xl-2 col-form-label"><small>Комната № </small><span class="font-weight-bold" id="roomnum' + (i + 1) + '">' + (i + 1) + '</span></label><label for="roomsize' + (i + 1) + '" class="col-xl-2 col-form-label">Вместимость: </label><div class="col-xl-2"><input class="form-control" type="number" placeholder="Число" id="roomsize' + (i + 1) + '" name="roomsize' + (i + 1) + '" min="1" max="6"></div><div class="col-xl-1" id="forremover' + (i + 1) + '"><a href="#" class="badge badge-danger badge-pill align-middle" onclick="removeRoom(' + (i + 1) + ')" id="remover' + (i + 1) + '">Удалить комнату <i class="fa fa-trash-o"></i></a></div></div></div>';
+        roomlist.appendChild(newroomstring);
+        if (i == 9) {
+          document.getElementById('newroombtn').disabled = true;
+        }
+        i = -1; //Ломаем к чертям цикл    
+      }
     }
-    function removeRoom(room) {
-        var node = document.querySelector('#room' + room);
-        node.parentNode.removeChild(node);
-        if (room != 2) {
-            let roomremover = document.createElement('a');
-            roomremover.innerHTML = '<a href="#" class="badge badge-danger badge-pill align-middle" onclick="removeRoom('+ (room - 1) +')" id="remover' + (room - 1) + '">Удалить комнату <i class="fa fa-trash-o"></i></a>';
-            console.log(roomremover);
-            let removeradd = document.getElementById('forremover' + (room - 1));
-            removeradd.appendChild(roomremover);
-        }
-        if (room == 10) {
-            document.getElementById('newroombtn').disabled = false;
-        }
+  }
+  function removeRoom(room) {
+    var node = document.querySelector('#room' + room);
+    node.parentNode.removeChild(node);
+    if (room != 2) {
+      let roomremover = document.createElement('a');
+      roomremover.innerHTML = '<a href="#" class="badge badge-danger badge-pill align-middle" onclick="removeRoom(' + (room - 1) + ')" id="remover' + (room - 1) + '">Удалить комнату <i class="fa fa-trash-o"></i></a>';
+      console.log(roomremover);
+      let removeradd = document.getElementById('forremover' + (room - 1));
+      removeradd.appendChild(roomremover);
     }
+    if (room == 10) {
+      document.getElementById('newroombtn').disabled = false;
+    }
+  }
 </script>
-</body>
-</html>

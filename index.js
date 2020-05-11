@@ -1,11 +1,29 @@
 var express = require('express');
+const Handlebars = require('handlebars')
+const exphbs = require('express-handlebars');
 var mysql = require('mysql');
-var app = express();
-const hbs = require("hbs");
 const bodyParser = require("body-parser");
+const { allowInsecurePrototypeAccess } = require('@handlebars/allow-prototype-access');
 
+var app = express();
+var handlebars = exphbs.create({
+    handlebars: allowInsecurePrototypeAccess(Handlebars),
+    helpers: {
+        frs: function (room, pod) {
+            var freespace = room.size - room.students.length;
+            freepodid = "fp" + pod;
+            return freespace;
+        }
+    },
+    partialsDir: ["views/partials/"],
+    extname: '.hbs'
+});
 const urlencodedParser = bodyParser.urlencoded({ extended: false });
-app.set('view engine', 'hbs');
+
+app.engine('.hbs', handlebars.engine);
+
+app.set('view engine', '.hbs');
+
 var connection = mysql.createConnection({
     host: 'localhost',
     user: 'root',
@@ -14,17 +32,15 @@ var connection = mysql.createConnection({
 });
 
 app.use(express.static(__dirname + '/public'));
-
+app.listen(3000);
 app.get('/', function (req, res) {
     connection.query("SELECT * FROM students",
         function (err, results, fields) {
             res.render('control', { users: results });
         });
-    // connection.end();
 });
 
 app.post("/delete/:resp", function (req, res) {
-    //let require = req.params.resp.split('_');
     let resp = [];
     resp = req.params.resp.split('_');
     connection.query("SELECT * FROM flats WHERE flat='" + resp[1] + "'", function (err, respflat, fields) {
@@ -46,20 +62,19 @@ app.post("/", urlencodedParser, function (req, res) {
     var k_v_q = "";
     kv_s = kv_s.split(",");
     if (kv_s[0] != "") {
-        k_v_q+=` AND ( `
+        k_v_q += ` AND ( `
         for (let i = 0; i < kv_s.length; i++) {
             var kv_r = kv_s[i].split("-");
             if (kv_r[1] != undefined) {
                 k_v_q += ` ( flat>=${kv_r[0]} AND flat<=${kv_r[1]} ) OR`;
             }
             else {
-                k_v_q+=` flat=${kv_s[i]} OR`;
+                k_v_q += ` flat=${kv_s[i]} OR`;
             }
         }
-        k_v_q=k_v_q.substr(0,k_v_q.length-2);
-        k_v_q+=" )";
+        k_v_q = k_v_q.substr(0, k_v_q.length - 2);
+        k_v_q += " )";
     }
-    console.log(k_v_q);
     var f_n_q = "1";
     var s_n_q = "1";
     if (req.body.f_n != "") {
@@ -79,7 +94,7 @@ app.get('/st', function (req, res) {
 app.get('/z', function (req, res) {
     res.sendFile(__dirname + "/html/zayavka.html");
 })
-app.listen(3000);
+
 
 class Room {
     constructor(numin, size, students, freeStatus) {
@@ -164,18 +179,18 @@ function madeFreeList(results) {
         }
     }
     return padiki;
-}
-hbs.registerHelper("frs", function (room, pod) {
-    var freespace = room.size - room.students.length;
-    freepodid = "fp" + pod;
-    return freespace;
-});
+};
 
-app.set("view engine", "hbs");
+// hbs.registerHelper("frs", function (room, pod) {
+//     var freespace = room.size - room.students.length;
+//     freepodid = "fp" + pod;
+//     return freespace;
+// });
+
 app.get('/add', function (req, res) {
     connection.query("SELECT * FROM flats",
         function (err, results, fields) {
-            res.render('addnewstudent2', { padiki: madeFreeList(results) });
+            res.render('addstudent', { padiki: madeFreeList(results) });
         });
 })
 

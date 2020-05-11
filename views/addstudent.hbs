@@ -1,0 +1,205 @@
+<div class="container mt-3">
+    <div class="row">
+        <div class="col-sm-9 order-2 order-sm-1">
+            <form method="POST">
+                <h3>Мастер добавления студента</h3>
+                <h4>Личная информация</h4>
+                <div class="group" id="parentnamecol">
+                    <div class="form-group row" id="namecol">
+                        <label for="name" class="col-2 col-form-label">Ф.И.О.: </label>
+                        <div class="col-10" id="name"><input class="form-control" type="text"
+                                placeholder="Иванов Иван Иванович" id="name0" name="name0" required></div>
+                        <div class="col-2"></div>
+                        <div class="col-10"><a class="small text-muted" href="#РЕЖИМФИО"
+                                onclick="changeNameMode(1)">Сменить режим ввода Ф.И.О.</a></div>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="birthday" class="col-2 col-form-label">Д/р: </label>
+                    <div class="col-10">
+                        <input class="form-control" type="date" placeholder="" id="birthday" name="birthday" required>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="grade1" class="col-2 col-form-label">И-т: </label>
+                    <div class="col-10">
+                        <select class="form-control" placeholder="Выберите институт" id="grade1" name="grade1" required>
+                            <option>ИИТ</option>
+                            <option>Инстиут Кибернетики</option>
+                            <option>ИТХТ</option>
+                            <option>ФТИ</option>
+                            <option>ИРТС</option>
+                            <option>ИНТЕГУ</option>
+                            <option>ИЭП</option>
+                            <option>ИКБСП</option>
+                        </select>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="grade2" class="col-2 col-form-label">Тип: </label>
+                    <div class="col-4">
+                        <select class="form-control" placeholder="Тип образования" id="grade2" name="grade2" required>
+                            <option>Бакалвариат</option>
+                            <option>Специалитет</option>
+                            <option>Магистратура</option>
+                            <option>Аспирантура</option>
+                            <option>Другое</option>
+                        </select>
+                    </div>
+                    <label for="grade3" class="col-2 col-form-label">Курс: </label>
+                    <div class="col-4">
+                        <input class="form-control" type="number" placeholder="Курс" id="grade3" min="1" max="6"
+                            name="grade3" required>
+                    </div>
+                </div>
+                <h4>Паспортные данные</h4>
+                <div class="form-group row">
+                    <label for="passport1" class="col-2 col-form-label">Серия: </label>
+                    <div class="col-4">
+                        <input class="form-control" type="number" placeholder="1234" id="passport1" name="passport1"
+                            required>
+                    </div>
+                    <label for="passport2" class="col-2 col-form-label">Номер: </label>
+                    <div class="col-4">
+                        <input class="form-control" type="number" placeholder="567891" id="passport2" name="passport2"
+                            required>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="passport3" class="col-2 col-form-label">Выдан: </label>
+                    <div class="col-10">
+                        <input class="form-control" type="text" placeholder="Отдел..." id="passport3" name="passport3"
+                            required>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="passport4" class="col-2 col-form-label">Дата выдачи: </label>
+                    <div class="col-10">
+                        <input class="form-control" type="date" placeholder="" id="passport4" name="passport4" required>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <label for="passport5" class="col-2 col-form-label">Постоянная регистрация: </label>
+                    <div class="col-10">
+                        <textarea class="form-control"
+                            placeholder="Введите место постоянной регистрации согласно паспорту" id="passport5"
+                            name="passport5" required></textarea>
+                    </div>
+                </div>
+                <h4>Данные о договоре</h4>
+                <div class="form-group row">
+                    <label for="dogovor1" class="col-2 col-form-label">Номер: </label>
+                    <div class="col-4">
+                        <input class="form-control" type="text" placeholder="1234" id="dogovor1" name="dogovor1"
+                            required>
+                    </div>
+                    <label for="dogovor2" class="col-2 col-form-label">Дата: </label>
+                    <div class="col-4">
+                        <input class="form-control" type="date" placeholder="" id="dogovor2" name="dogovor2" required>
+                    </div>
+                </div>
+                <div class="form-group row">
+                    <div class="col-6"></div>
+                    <label for="dogovor3" class="col-2 col-form-label">Окончание: </label>
+                    <div class="col-4">
+                        <input class="form-control" type="date" placeholder="" id="dogovor3" name="dogovor3" required>
+                    </div>
+                </div>
+                <div class="group">
+                    <h4>Выбор комнаты <small class="text-muted" id="displaySelectedRoom"></small></h4>
+                    <ul class="nav nav-tabs" role="tablist">
+                        {{#each padiki}}
+                        <li class="nav-item">
+                            <a class="nav-link" data-toggle="tab" href="#p{{@index}}" role="tab">Подъезд
+                                {{@index}}<br /><span class="small text-center text-success">Свободно: <span
+                                        id="setherefree_{{@index}}">0</span></span></a>
+                        </li>
+                        {{/each}}
+                    </ul>
+                    <div class="tab-content">
+                        {{#each padiki}}
+                        <div class="tab-pane" id="p{{@index}}" role="tabpanel">
+                            <div class="container">
+                                <div class="row">
+                                    {{#each this.flat}}
+                                    <div class="col-xl-4 h-50 mt-1 mb-1">
+                                        <!--- Вот этот блок тупо генерируешь по количеству свободных квартир -->
+                                        <div class="container" style="background-color:#FFFFFF">
+                                            <h6 class="text-center">Квартира №{{this.numin}}</h6>
+                                            {{#each this.flatdata}}
+                                            <div class="row mt-1">
+                                                <div class="col-sm-8"><em>Комната №{{this.numin}}</em><br /><span
+                                                        class="small text-center">Свободно <span
+                                                            class="text-success">{{frs this ../pod}}</span> из
+                                                        {{this.size}}</span></div>
+                                                <div class="col-4"><a href="#SETROOM" class="text-muted"
+                                                        onclick="setRoom({{../numin}},{{this.numin}})">Выбрать
+                                                        комнату
+                                                    </a>
+                                                </div>
+                                                <script>
+                                                    var genid = 'setherefree_' + {{../pod}};
+                                                    var counter = parseInt(document.getElementById(genid).innerHTML);
+                                                    counter += {{ frs this../ pod }};
+                                                    document.getElementById(genid).innerHTML = counter;
+                                                </script>
+                                            </div>
+                                            {{/each}}
+                                        </div>
+                                    </div>
+                                    {{/each}}
+                                </div>
+                            </div>
+                        </div>
+                        {{/each}}
+                    </div>
+                </div>
+                <div style="visibility: hidden;"><input type="text" class="form-control" name="selFlat"
+                        id="selFlat"><input type="text" class="form-control" name="selRoom" id="selRoom"></div>
+                <button type="submit" id="sumbitbtn" class="btn btn-primary" disabled>Добавить</button>
+                <button type="back" class="btn btn-danger">Отменить</button>
+            </form>
+        </div>
+        <div class="col-sm-3 order-1 order-sm-2 h-50" style="background-color:#FFFFFF">
+            <div class="form-group">
+                <h5>Как добавить студента?</h5>
+                <p>На данной странице Вы можете блабла тут инструкция как пользоваться сие чудом потому что юзвери тупые
+                    (<strong>можно</strong> заюзать различные <mark>выделения</mark> текста <em>будет классно</em>)</p>
+                <p>Далеко-далеко за словесными горами в стране гласных и согласных живут рыбные тексты. Вдали от всех
+                    живут они в буквенных домах на берегу Семантика большого языкового океана. Маленький ручеек Даль
+                    журчит по всей стране и обеспечивает ее всеми необходимыми правилами. Эта парадигматическая страна,
+                    в которой жаренные члены предложения залетают прямо в рот. Даже всемогущая пунктуация не имеет
+                    власти над рыбными текстами, ведущими безорфографичный образ жизни. Однажды одна маленькая строчка
+                    рыбного текста по имени Lorem ipsum решила выйти в большой мир грамматики.</p>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function setRoom(flat, room) {
+        var string = 'Выбрано: кв.' + flat + ' к.' + room;
+        document.getElementById("displaySelectedRoom").innerHTML = string;
+        document.getElementById("selFlat").value = flat;
+        document.getElementById("selRoom").value = room;
+        document.getElementById("sumbitbtn").disabled = false;
+
+    }
+    function changeNameMode(par) {
+        if (par) {
+            console.log('G1');
+            let node = document.querySelector('#namecol');
+            node.parentNode.removeChild(node);
+            let newName = document.createElement('div');
+            newName.innerHTML = '<div class="form-group row" id="namecol"><label for="name" class="col-2 col-form-label">Ф.И.О.: </label><div class="col-10" id="name"><div class="form-row"><div class="col-auto"><input type="text" class="form-control" id="name1" name="name1" placeholder="Фамилия" required></div><div class="col-auto"><input type="text" class="form-control" id="name2" name="name2" placeholder="Имя" required></div><div class="col-auto"><input type="text" class="form-control" id="name3" name="name3" placeholder="Отчество (или другое)" required></div></div></div><div class="col-2"></div><div class="col-10"><a class="small text-muted" href="#РЕЖИМФИО" onclick="changeNameMode(0)">Сменить режим ввода Ф.И.О.</a></div></div>';
+            parentnamecol.appendChild(newName);
+        }
+        else {
+            console.log('G2');
+            let node = document.querySelector('#namecol');
+            node.parentNode.removeChild(node);
+            let newName = document.createElement('div');
+            newName.innerHTML = '<div class="form-group row" id="namecol"><label for="name" class="col-2 col-form-label">Ф.И.О.: </label><div class="col-10" id="name"><input class="form-control" type="text" placeholder="Иванов Иван Иванович" id="name0" name="name0" required></div><div class="col-2"></div><div class="col-10"><a class="small text-muted" href="#РЕЖИМФИО" onclick="changeNameMode(1)">Сменить режим ввода Ф.И.О.</a></div></div>';
+            parentnamecol.appendChild(newName);
+        }
+    }
+</script>
