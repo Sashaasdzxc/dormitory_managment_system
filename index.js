@@ -94,6 +94,9 @@ app.get('/st', function (req, res) {
 app.get('/z', function (req, res) {
     res.sendFile(__dirname + "/html/zayavka.html");
 })
+app.get('/scripts/qrcoder/qrcode.min.js', function (req, res) {
+    res.sendFile(__dirname + "/scripts/qrcoder/qrcode.min.js");
+})
 
 
 class Room {
@@ -229,7 +232,9 @@ function makevc(length) {
     }
     return result;
 }
-
+app.post("/reg", urlencodedParser, function (req, res) {
+    
+});
 app.post("/add", urlencodedParser, function (req, res) {
     let newstudentverifycode = makevc(6);
     let newstudentid;
@@ -262,8 +267,11 @@ app.post("/add", urlencodedParser, function (req, res) {
                     thisFlat.refreshStatus();
                     console.log(thisFlat);
                     connection.query("UPDATE flats SET flatdata='" + JSON.stringify(thisFlat.flatdata) + "',isFree='" + ((thisFlat.freeStatus) ? 1 : 0) + "' WHERE flat='" + req.body.selFlat + "'", function (err, finalresult, fields) {
-                        if (err) res.render('afteradd', { otherError: 'СТУДЕНТ ДОБАВЛЕН, НО КВАРТИРА НЕ ОБНОВЛЕНА: ' + err });
-                        res.render('afteradd', { wereDone: 1 });
+                        if (err) res.render('afteradd', { otherError: 'СТУДЕНТ ДОБАВЛЕН, НО КВАРТИРА НЕ ОБНОВЛЕНА. ОБРАТИТЕСЬ В ПОДДЕРЖКУ: ' + err });
+                        connection.query("INSERT INTO users (`id`, `vcode`) VALUES ('" + newstudent.insertId + "', '" + newstudentverifycode + "')", function (err, addingvcode, fields) {
+                            if (err) res.render('afteradd', { otherError: 'НЕ ДОБАВЛЕНА ЗАПИСЬ СТУДЕНТА: ' + err });
+                            res.render('afteradd', { wereDone: 1, vcode: newstudentverifycode });
+                        });
                     });
                 });
             }
