@@ -47,9 +47,13 @@ app.post("/delete/:resp", function (req, res) {
         let thisFlat = new Flat(respflat[0].id, respflat[0].pod, respflat[0].flat, JSON.parse(respflat[0].flatdata), respflat[0].isFree);
         thisFlat.removeStudent(resp[0], resp[2]);
         connection.query("UPDATE flats SET flatdata='" + JSON.stringify(thisFlat.flatdata) + "',isFree='" + ((thisFlat.freeStatus) ? 1 : 0) + "' WHERE flat='" + resp[1] + "'", function (err, finalresult, fields) {
-            if (err) res.render('afteradd', { otherError: 'СТУДЕНТ УДАЛЁН, НО КВАРТИРА НЕ ОБНОВЛЕНА: ' + err });
+            if (err) res.render('afteradd', { otherError: 'СТУДЕНТ НЕ УДАЛЁН, КВАРТИРА НЕ ОБНОВЛЕНА: ' + err });
             connection.query("DELETE FROM students WHERE id=?", [resp[0]], function (err, result, fields) {
-                res.redirect("/");
+                if (err) res.render('afteradd', { otherError: 'СТУДЕНТ НЕ УДАЛЁН, КВАРТИРА ОБНОВЛЕНА: ' + err });
+                connection.query("DELETE FROM users WHERE id=?", [resp[0]], function (err, result, fields) {
+                    if (err) res.render('afteradd', { otherError: 'СТУДЕНТ НЕ УДАЛЁН ИЗ СПИСКА АВТОРИЗАЦИИ, КВАРТИРА ОБНОВЛЕНА: ' + err });
+                    res.redirect("/");
+                });
             });
         });
     });
