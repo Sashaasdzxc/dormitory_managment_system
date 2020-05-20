@@ -16,7 +16,8 @@
         <div class="row h-100 justify-content-center align-items-center">
             <div class="col-md-6 ">
                 <h1 style="font-family: 'Jost', sans-serif; color:#FFF;font-size:3.5rem">Регистрация</h1>
-                <p style="font-family: 'Jost', sans-serif; font-size:1.2rem; color:#FFF; font-size:2rem">Введите верификационный код,
+                <p style="font-family: 'Jost', sans-serif; font-size:1.2rem; color:#FFF; font-size:2rem">Введите
+                    верификационный код,
                     чтобы
                     продолжить регистрацию ну и т.д. </p>
             </div>
@@ -26,11 +27,8 @@
                         <div>
                             <label class="sr-only" for="inlineFormInputGroup">Введите код</label>
                             <div class="input-group mb-2">
-                                <div class="input-group-prepend">
-                                    <div class="input-group-text" style="font-size:2rem">@</div>
-                                </div>
-                                <input type="text" style="font-size:2rem" class="form-control" id="inlineFormInputGroup"
-                                    placeholder="Введите код">
+                                <input type="text" maxlength="6" pattern="^[A-Z0-9]+$" style="font-size:2rem"
+                                    class="form-control" id="inlineFormInputGroup" placeholder="Введите код">
                             </div>
                         </div>
                         <div>
