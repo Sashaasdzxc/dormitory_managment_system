@@ -28,7 +28,7 @@
                         <div id="regforms">
                             <label class="sr-only" for="inlineFormInputGroup">Введите код</label>
                             <div id="vcodediv" class="input-group mb-2">
-                                <input type="text" maxlength="6" pattern="^[a-zA-Z0-9]+$" style="font-size:2rem; text-align:center" class="form-control" placeholder="Введите код" id="vcodeinput" name="vcodeinput" required>
+                                <input type="text" maxlength="6" oninput="vcodechanger()" style="font-size:2rem; text-align:center" class="form-control" placeholder="Введите код" id="vcodeinput" name="vcodeinput" required>
                             </div>
                         </div>
                         <div id="vcodebtn">

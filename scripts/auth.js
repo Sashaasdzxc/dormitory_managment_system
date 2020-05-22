@@ -34,5 +34,7 @@ async function continueVCode() {
             return 0;
         }
     }
-
+}
+function vcodechanger() {
+    document.getElementById('vcodeinput').value = document.getElementById('vcodeinput').value.toUpperCase();
 }
