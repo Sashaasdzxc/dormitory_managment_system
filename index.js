@@ -321,6 +321,8 @@ app.post("/add", urlencodedParser, function (req, res) {
 //    console.log(params);
 //    return params;
 //}
+
+//РЕГИСТРАЦИЯ
 app.get('/reg', function (req, res) {
     res.sendFile(__dirname + "/html/registration.html");
 });
@@ -352,9 +354,24 @@ app.post('/reg', urlencodedParser, function (req, res) {
         res.render('control');
     });
 });
+
 app.get('/mailcheck/:mail', function (req, res) {
     connection.query("SELECT * FROM users WHERE login='" + req.params.mail + "'", function (err, respuser, fields) {
         if (respuser.length != 0) res.send(JSON.stringify(13));
         else res.send(JSON.stringify(0));
     });
 });
+
+//АВТОРИЗАЦИЯ
+function userAuth() {
+
+}
+
+app.get('/login', function (req, res) {
+    res.sendFile(__dirname + "/html/login.html");
+});
+app.post('/login', urlencodedParser, function (req, res) {
+    res.sendFile(__dirname + "/html/login.html");
+});
+
+//ПРОВЕРКА АВТОРИЗАЦИИ
