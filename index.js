@@ -101,6 +101,9 @@ app.get('/z', function (req, res) {
 app.get('/scripts/qrcoder/qrcode.min.js', function (req, res) {
     res.sendFile(__dirname + "/scripts/qrcoder/qrcode.min.js");
 })
+app.get('/scripts/auth.js', function (req, res) {
+    res.sendFile(__dirname + "/scripts/auth.js");
+})
 
 
 class Room {
@@ -236,9 +239,7 @@ function makevc(length) {
     }
     return result;
 }
-app.post("/reg", urlencodedParser, function (req, res) {
-    
-});
+
 app.post("/add", urlencodedParser, function (req, res) {
     let newstudentverifycode = makevc(6);
     let newstudentid;
@@ -282,5 +283,78 @@ app.post("/add", urlencodedParser, function (req, res) {
             else res.render('afteradd', { roomIsFull: 1 });
         }
         else res.render('afteradd', { flatIsFull: 1 });
+    });
+});
+
+
+//function getUrlParams(url) {
+//    let params = {};
+//    if (url) {
+//        let queryArray = url.split('&');
+//        for (let i = 0; i < queryArray.length; i++) {
+//            let currentparam = queryArray[i].split('=');
+//            let paramNum = undefined;
+//            let paramName = currentparam[0].replace(/\[\d*\]/, function (v) {
+//                paramNum = v.slice(1, -1);
+//                return '';
+//            });
+//            let paramValue = typeof (currentparam[1]) === 'undefined' ? true : currentparam[1];
+//
+//
+//            if (params[paramName]) {  // если ключ параметра уже задан
+//                if (typeof params[paramName] === 'string') {
+//                    params[paramName] = [params[paramName]];
+//                }
+//                if (typeof paramNum === 'undefined') { // если не задан индекс...
+//                    params[paramName].push(paramValue);
+//                }
+//                else { // если индекс задан...
+//                    params[paramName][paramNum] = paramValue;
+//                }
+//            }
+//            // если параметр не задан, делаем это вручную
+//            else {
+//                params[paramName] = paramValue;
+//            }
+//        }
+//    }
+//    console.log(params);
+//    return params;
+//}
+app.get('/reg', function (req, res) {
+    res.sendFile(__dirname + "/html/registration.html");
+});
+app.get('/reg/:vcode', function (req, res) {
+    connection.query("SELECT * FROM users WHERE vcode='" + req.params.vcode + "'", function (err, respuser, fields) {
+        if (err) {
+            res.send(JSON.stringify(12));
+            return 12
+        }
+        if (respuser.length == 0) {
+            res.send(JSON.stringify(12));
+            return 12
+        }
+        if (respuser[0].vcode == req.params.vcode) {
+            connection.query("SELECT * FROM students WHERE id='" + respuser[0].id + "'", function (err, respstudent, fields) {
+                let array = {};
+                array['name'] = respstudent[0].first_name;
+                res.send(JSON.stringify(array));
+            });
+        }
+        else {
+            res.send(JSON.stringify(12)); // Код ошибки означает, что вкод невалидный - не существует 
+        }
+    });
+});
+
+app.post('/reg', urlencodedParser, function (req, res) {
+    connection.query("UPDATE users SET vcode=NULL, login='" + req.body.mail + "', password='" + req.body.password1 + "' WHERE vcode='" + req.body.vcodeinput + "'", function (err, respuser, fields) {
+        res.render('control');
+    });
+});
+app.get('/mailcheck/:mail', function (req, res) {
+    connection.query("SELECT * FROM users WHERE login='" + req.params.mail + "'", function (err, respuser, fields) {
+        if (respuser.length != 0) res.send(JSON.stringify(13));
+        else res.send(JSON.stringify(0));
     });
 });
